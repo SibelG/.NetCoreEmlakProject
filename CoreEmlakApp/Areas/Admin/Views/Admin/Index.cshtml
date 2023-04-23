@@ -1,0 +1,15 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+@using Microsoft.AspNetCore.Http
+<div class="container">
+    <div class="row">
+        <div class="jumbotron">@Context.Session.GetString("FullName") Welcome</div>
+    </div>
+
+</div>
+
+

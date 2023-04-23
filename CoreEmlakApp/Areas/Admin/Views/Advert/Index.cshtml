@@ -1,0 +1,88 @@
+﻿@model List<EntityLayer.Entities.Advert>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+@if(Model.Count==0){
+    <div class="container">
+        <div class="row">
+            <div class="alert alert-success">No Advert</div>
+        </div>
+    </div>
+}
+else
+{
+    <table class="table table-bordered table table-striped" id="table">
+        <tr>
+            <th>Description</th>
+            <th>Price</th>
+            <th>Room Count</th>
+            <th>Bath Count</th>
+            <th>Area</th>
+            <th>Furniture</th>
+            <th>Floor</th>
+            <th>Garage</th>
+            <th>Address</th>
+            <th>Advert Images</th>
+            <th>Delete</th>
+            <th>Edit</th>
+        </tr>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Description</td>
+                    <td>@item.Price</td>
+                    <td>@item.NumberOfRooms</td>
+                    <td>@item.BathRoomNumbers</td>
+                    <td>@item.Area</td>
+                    <td>@item.Furniture</td>
+                    <td>@item.Floor</td>
+                    <td>@item.Garage</td>
+                    <td>@item.Address</td>
+                    <td><a class="btn btn-success" asp-action="AdvertImages" asp-route-id="@item.AdvertId">Advert Images</a></td>
+                    <td><a class="btn btn-danger" id="delete"  data-id="@item.AdvertId">Delete</a></td>
+                    <td><a class="btn btn-success" asp-action="Update" asp-route-id="@item.AdvertId">Update</a></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    }
+<a class="btn btn-primary" href="/Admin/Advert/Create">New Advert</a>
+
+<script>
+    $("#table").on("click","#delete",function(){
+        var id=$(this).data("id");
+
+
+        swal({
+            title: "Are you sure delete this?",
+            text: "Advert will delete. Are you sure really?",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        })
+            .then((willDelete) => {
+                if (willDelete) {
+                    $.ajax({
+                        type="GET",
+                        url="/Admin/Advert/Delete/" + id,
+                        
+                        success: function (response) {
+                          toastr.error("Advert deleted");
+                        }
+
+                    });
+
+                    $(this).parent("td").parent("tr").remove();
+                }
+            });
+    });
+    
+    
+</script>
+
+
+
