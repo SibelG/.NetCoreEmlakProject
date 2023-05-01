@@ -9,7 +9,13 @@ namespace EntityLayer.Entities
 {
     public class City
     {
+
+        public City()
+        {
+            Districts = new List<District>();   
+        }
         [Key]
+
         public int CityId { get; set; }
         public string CityName { get; set; }
         public bool Status { get; set; }

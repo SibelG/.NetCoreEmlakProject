@@ -1,0 +1,38 @@
+﻿@model EntityLayer.Entities.Type
+@{
+    ViewData["Title"] = "Update";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-6">
+
+                <div class="form-group">
+                    <form method="post" asp-antiforgery="true">
+                        <input type="hidden" asp-for="TypeId" />
+                        <label>Type Name</label>
+                        <input type="text" asp-for="TypeName" class="form-control" />
+                        <span asp-validation-for="TypeName" class="text-danger"></span>
+                        <br />
+                        <label>Situation</label>
+                        <select asp-for="SituationId" id="SituationId" class="form-control">
+                            <option value="0" selected>Select</option>
+                            @foreach (var item in ViewBag.situations)
+                            {
+                                <option value="@item.Value">@item.Text</option>
+                            }
+
+                        </select>
+                        <br />
+                        <button type="submit" class="btn btn-warning">Update Type</button>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+

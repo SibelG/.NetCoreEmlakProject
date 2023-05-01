@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 namespace CoreEmlakApp.Areas.Admin.Controllers
 {
     [Area("Admin")]
-   // [Authorize(Roles ="Admin")]
+    [Authorize(Roles ="Admin")]
     public class AdvertController : Controller
     {
         AdvertService advertService;
@@ -18,12 +18,13 @@ namespace CoreEmlakApp.Areas.Admin.Controllers
         NeighbourhoodService neighbourhoodService;
         SituationService situationService;
         TypeService typeService;
+        ImagesService imagesService;
 
         IWebHostEnvironment webHostEnvironment;
       
 
       
-        public AdvertController(AdvertService advertService,CityService cityService,DistrictService districtService,NeighbourhoodService neighbourhoodService,SituationService situationService,TypeService typeService,IWebHostEnvironment webHostEnvironment)
+        public AdvertController(AdvertService advertService,CityService cityService,DistrictService districtService,NeighbourhoodService neighbourhoodService,SituationService situationService,TypeService typeService,IWebHostEnvironment webHostEnvironment,ImagesService imagesService)
         {
             this.advertService = advertService;
             this.cityService = cityService;
@@ -31,25 +32,126 @@ namespace CoreEmlakApp.Areas.Admin.Controllers
             this.neighbourhoodService = neighbourhoodService;
             this.situationService = situationService;
             this.typeService = typeService; 
+            this.imagesService = imagesService;
             this.webHostEnvironment = webHostEnvironment;
         }
 
+        
         public IActionResult Index()
         {
-            string id = HttpContext.Session.GetString("id");
+            string id = HttpContext.Session.GetString("Id");
             var list = advertService.List(x => x.Status == true && x.UserAdminId==id);
+            //var list = advertService.List(x => x.Status == true);
             return View(list);
+        }
+
+        public IActionResult ImageList(int id)
+        {
+            var list = imagesService.List(x => x.Status == true && x.AdvertId == id);
+            return View(list);
+        }
+
+        public IActionResult ImageCreate()
+        {
+            return View();
+        }
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult ImageCreate(Advert data)
+        {
+            var advert = advertService.TGetById(data.AdvertId);
+            if (data.Image != null)
+            {
+                var filePath = Path.Combine(webHostEnvironment.WebRootPath, "img");
+                foreach (var item in data.Image)
+                {
+                    var fullFilePath = Path.Combine(filePath, item.FileName);
+
+                    using (var dosyaAkısı = new FileStream(fullFilePath, FileMode.Create))
+                    {
+                        item.CopyTo(dosyaAkısı);
+                    }
+
+                   imagesService.TAdd(new Images { ImageName = item.FileName, Status = true ,AdvertId = advert.AdvertId});
+                }
+
+               
+                TempData["Success"] = "Advert Success";
+                return RedirectToAction("Index");
+            }
+            return View(advert);
+        }
+
+        public IActionResult ImageDelete(int id)
+        {
+            var delete = imagesService.TGetById(id);
+            imagesService.TDelete(delete);  
+            return RedirectToAction("Index");
+
+        }
+
+        public IActionResult ImageUpdate(int id)
+        {
+            var image = imagesService.TGetById(id);
+            return View(image);
+
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult ImageUpdate(Images data)
+        {
+            var image = imagesService.TGetById(data.ImageId);
+
+
+            ImagesValidator validationRules = new ImagesValidator();
+            ValidationResult result = validationRules.Validate(image);
+
+            if (result.IsValid)
+            {
+                if (data.Image != null)
+                {
+                    var filePath = Path.Combine(webHostEnvironment.WebRootPath, "img");
+                 
+                    var fullFilePath = Path.Combine(filePath, data.Image.FileName);
+
+                        using (var dosyaAkısı = new FileStream(fullFilePath, FileMode.Create))
+                        {
+                            data.Image.CopyTo(dosyaAkısı);
+                        }
+
+                       
+                    
+
+                    imagesService.TUpdate(data);
+                   
+                    return RedirectToAction("Index");
+                }
+
+            }
+            else
+            {
+                foreach (var item in result.Errors)
+                {
+
+                    ModelState.AddModelError(item.PropertyName, item.ErrorMessage);
+                }
+            }
+
+            return View();
         }
         public IActionResult Create()
         {
-            ViewBag.userId = HttpContext.Session.GetString("userId");
+            ViewBag.userId = HttpContext.Session.GetString("Id");
             Dropdown();
             return View();
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [AllowAnonymous]
+
         public IActionResult Create(Advert data)
         {
             AdvertValidation validationRules = new AdvertValidation();
@@ -60,7 +162,8 @@ namespace CoreEmlakApp.Areas.Admin.Controllers
                 if (data.Image != null)
                 {
                     var filePath = Path.Combine(webHostEnvironment.WebRootPath, "img");
-                    foreach(var item in data.Image) { 
+                    foreach (var item in data.Image)
+                    {
                         var fullFilePath = Path.Combine(filePath, item.FileName);
 
                         using (var dosyaAkısı = new FileStream(fullFilePath, FileMode.Create))
@@ -68,9 +171,9 @@ namespace CoreEmlakApp.Areas.Admin.Controllers
                             item.CopyTo(dosyaAkısı);
                         }
 
-                        data.Images.Add(new Images { ImageName = item.FileName ,Status = true});
+                        data.Images.Add(new Images { ImageName = item.FileName, Status = true });
                     }
-                    
+
                     advertService.TAdd(data);
                     TempData["Success"] = "Advert Success";
                     return RedirectToAction("Index");
@@ -79,26 +182,27 @@ namespace CoreEmlakApp.Areas.Admin.Controllers
             }
             else
             {
-                foreach(var item in result.Errors) {
+                foreach (var item in result.Errors)
+                {
 
                     ModelState.AddModelError(item.PropertyName, item.ErrorMessage);
                 }
             }
-           
+
             Dropdown();
             return View();
         }
 
         public IActionResult DeleteList()
         {
-            string id = HttpContext.Session.GetString("id");
-            var list = advertService.List(x => x.Status == true && x.UserAdminId == id);
+            string id = HttpContext.Session.GetString("Id");
+            var list = advertService.List(x => x.Status == false && x.UserAdminId == id);
             return View(list);
         }
 
         public IActionResult RestoreDeleted(int id)
         {
-            var SessionUser = HttpContext.Session.GetString("id");
+            var SessionUser = HttpContext.Session.GetString("Id");
             var delete = advertService.TGetById(id);
 
             if (SessionUser.ToString() == delete.UserAdminId)
@@ -107,6 +211,43 @@ namespace CoreEmlakApp.Areas.Admin.Controllers
                 TempData["RestoreDelete"] = "Advert Again Uploaded";
                 return RedirectToAction("Index");
             }
+            return View();
+
+        }
+        public IActionResult Update(int id)
+        {
+            ViewBag.userId = HttpContext.Session.GetString("userId");
+            Dropdown();
+            var advert = advertService.TGetById(id);
+            return View(advert);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [AllowAnonymous]
+        public IActionResult Update(Advert data)
+        {
+            AdvertValidation validationRules = new AdvertValidation();
+            ValidationResult result = validationRules.Validate(data);
+
+            if (result.IsValid)
+            {
+                advertService.TUpdate(data);
+                TempData["Update"] = "Advert Update Success";
+                return RedirectToAction("Index");
+               
+
+            }
+            else
+            {
+                foreach (var item in result.Errors)
+                {
+
+                    ModelState.AddModelError(item.PropertyName, item.ErrorMessage);
+                }
+            }
+
+            Dropdown();
             return View();
 
         }
@@ -126,7 +267,7 @@ namespace CoreEmlakApp.Areas.Admin.Controllers
         }
         public IActionResult Delete(int id)
         {
-            var SessionUser = HttpContext.Session.GetString("id");
+            var SessionUser = HttpContext.Session.GetString("Id");
             var delete = advertService.TGetById(id);
 
             if (SessionUser.ToString() == delete.UserAdminId)
@@ -182,6 +323,52 @@ namespace CoreEmlakApp.Areas.Admin.Controllers
         {
             ViewBag.cityList = new SelectList(CityGet(), "CityId", "CityName");
             ViewBag.situations = new SelectList(SituationGet(), "SituationId", "SituationName");
+
+
+            List<SelectListItem> value1 = (from x in districtService.List(x => x.Status == true)
+                                           select new SelectListItem
+                                           {
+                                               Text = x.DistrictName,
+                                               Value = x.DistrictId.ToString()
+
+
+                                           }).ToList();
+
+            ViewBag.district = value1;
+
+            List<SelectListItem> value2 = (from x in neighbourhoodService.List(x => x.Status == true)
+                                           select new SelectListItem
+                                           {
+                                               Text = x.NeighbourhoodName,
+                                               Value = x.NeighbourhoodId.ToString()
+
+
+                                           }).ToList();
+
+            ViewBag.neighbourhood = value2;
+            List<SelectListItem> value3 = (from x in typeService.List(x => x.Status == true)
+                                           select new SelectListItem
+                                           {
+                                               Text = x.TypeName,
+                                               Value = x.TypeId.ToString()
+
+
+                                           }).ToList();
+
+            ViewBag.type = value3;
+
+            List<SelectListItem> value4 = (from x in situationService.List(x => x.Status == true)
+                                           select new SelectListItem
+                                           {
+                                               Text = x.SituationName,
+                                               Value = x.SituationId.ToString()
+
+
+                                           }).ToList();
+
+            ViewBag.situation = value4;
+
+
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using BusinessLayer.Abstract;
 using DataAccessLayer.Abstract;
 using DataAccessLayer.Concrate;
+using DataAccessLayer.EntityFramework;
 using EntityLayer.Entities;
 using System;
 using System.Collections.Generic;
@@ -27,12 +28,16 @@ namespace BusinessLayer.Concrete
 
         public void TAdd(District p)
         {
+            p.Status = true;
             _districtRepository.TAdd(p);
         }
 
         public void TDelete(District p)
         {
-            _districtRepository.TDelete(p);
+            var district = _districtRepository.TGetById(p.DistrictId);
+            district.Status = false;
+            _districtRepository.TUpdate(district);
+            
         }
 
         public District TGetById(int id)

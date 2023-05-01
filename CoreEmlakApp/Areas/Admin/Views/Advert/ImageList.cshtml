@@ -1,0 +1,31 @@
+﻿@model List<EntityLayer.Entities.Images>
+@{
+    ViewData["Title"] = "ImageList";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-6">
+                <div class="card-header">
+                    <h2>Images</h2>
+
+                </div>
+                <div class="card-body">
+                    @foreach(var item in Model)
+                    {
+                        <div class="col-md-4">
+                            <img src="~/img/@item.ImageName" width="80" height="80"/>
+                            <br/>
+                            <br/>
+                            <a asp-action="ImageUpdate" asp-route-id="@item.ImageId" class="btn btn-primary"style="margin-bottom:10px">Update</a>
+                            <a asp-action="ImageDelete" asp-route-id="@item.ImageId" class="btn btn-danger" style="margin-bottom:10px" onClick="return confirm('Are you sure delete?')">Delete</a>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

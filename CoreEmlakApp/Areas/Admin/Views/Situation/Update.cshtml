@@ -1,0 +1,27 @@
+﻿@model EntityLayer.Entities.Situation
+@{
+    ViewData["Title"] = "Update";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-6">
+
+                <div class="form-group">
+                    <form method="post" asp-antiforgery="true">
+                        <input type="hidden" asp-for="SituationId" />
+                        <label>Situation Name</label>
+                        <input type="text" asp-for="SituationName" class="form-control" />
+                        <span asp-validation-for="SituationName" class="text text-danger"></span>
+                        <br />
+                        <button type="submit" class="btn btn-warning">Update Situation</button>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>

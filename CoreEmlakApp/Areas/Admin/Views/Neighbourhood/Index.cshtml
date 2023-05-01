@@ -1,0 +1,79 @@
+﻿@model List<EntityLayer.Entities.Neighbourhood>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+@if (Model.Count == 0)
+{
+    <div class="container">
+        <div class="row">
+            <div class="alert alert-success">No Neighbourhood</div>
+        </div>
+    </div>
+}
+else
+{
+    <table class="table table-bordered table table-striped" id="table">
+        <tr>
+            <th>Neighbourhood Name</th>
+            <th>District Name</th>
+            <th>Delete</th>
+            <th>Edit</th>
+        </tr>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+
+                    <td>@item.NeighbourhoodName</td>
+                    <td>@item.District.DistrictName</td>
+
+                    <td><a class="btn btn-danger" id="delete" data-id="@item.NeighbourhoodId">Delete</a></td>
+                    <td><a href="/Admin/Neighbourhood/Update/@item.NeighbourhoodId" class="btn btn-warning">Update</a></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+<a class="btn btn-primary" href="/Admin/Neighbourhood/Create">New City</a>
+
+<script type="text/javascript">
+
+    $("#table").on("click", "#delete", function () {
+        var id = $(this).data("id");
+
+        swal({
+            title: "Are you sure you want to delete?",
+            text: "If you delete it, you are ready to run away!",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonClass: "btn-danger",
+            confirmButtonText: "Yes, I will delete it!",
+            cancelButtonText: "Forget it!",   //Modify the cancel display
+            closeOnConfirm: false,
+            showLoaderOnConfirm: true  //Display page of loading waiting time
+        },
+            function () {
+                //  Send an ajax request to the backend
+                $.ajax({
+                    url: '/Admin/Neighbourhood/Delete/' + id,
+                    type: 'get',
+
+                    success: function () {
+
+
+                        swal("deleted!", "Go back and pack your luggage, get ready to run!", "success");
+                        $(this).parent("td").parent("tr").remove();
+
+
+                    }
+                });
+
+            });
+
+    });
+
+
+</script>
+

@@ -46,7 +46,9 @@ namespace BusinessLayer.Concrete
 
         public void TUpdate(Images p)
         {
-            _imagesRepository.TUpdate(p);
+            var update = _imagesRepository.TGetById(p.ImageId);
+            update.ImageName = p.ImageName;
+            _imagesRepository.TUpdate(update);
         }
     }
 }

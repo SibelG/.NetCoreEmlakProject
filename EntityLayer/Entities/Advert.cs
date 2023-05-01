@@ -11,12 +11,16 @@ namespace EntityLayer.Entities
 {
     public class Advert
     {
+
+        public Advert() {
+            Images = new List<Images>();
+        }
         [Key]
         public int AdvertId{ get; set; }
         public string AdvertTitle { get; set; }
         public string Description { get; set; }
         public double Price { get; set; }
-        public string Garage { get; set; }
+        public bool Garage { get; set; }
         public bool Garden { get; set; }
         public bool Fireplace { get; set; }
         public bool Furniture { get; set;}
@@ -24,8 +28,13 @@ namespace EntityLayer.Entities
         public bool AirCoordinator { get; set; }
         public int NumberOfRooms { get; set; }
         public int BathRoomNumbers { get; set; }
+
+       
         public bool Credid { get; set; }
+
+        public bool Teras { get; set; }
         public int Area { get; set; }
+
         public DateTime AdvertDate { get; set; }
         public int Floor { get; set; }
         public string PhoneNumber { get; set; }

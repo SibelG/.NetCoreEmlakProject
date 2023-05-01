@@ -16,9 +16,14 @@
     <!-- Custom Stylesheet -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
     <link href="~/adminweb/css/style.css" rel="stylesheet">
+    <script src="~/adminweb/plugins/jquery/jquery.min.js"></script>
+    <script src="~/adminweb/plugins/jquery-validation/jquery.validate.min.js"></script>
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    
 
 </head>
 
@@ -30,10 +35,16 @@
             toastr.success('@TempData["Success"]', 'Success');
             </script>
     }
+    @if (TempData["Update"] != null)
+    {
+        <script type="text/javascript">
+            toastr.warning('@TempData["Update"]', 'Success');
+        </script>
+    }
     @if (TempData["RestoreDelete"] != null)
     {
         <script type="text/javascript">
-            toastr.success('@TempData["Success"]', 'Success');
+            toastr.info('@TempData["RestoreDelete"]', 'Success');
         </script>
     }
     <!--*******************
@@ -61,7 +72,7 @@
             <div class="brand-logo">
                 <a href="index.html">
                     <b class="logo-abbr"><img src="~/adminweb/images/logo.png" alt=""> </b>
-                    <span class="logo-compact"><img src="./images/logo-compact.png" alt=""></span>
+                    <span class="logo-compact"><img src="~/adminweb/images/logo-compact.png" alt=""></span>
                     <span class="brand-title">
                         <img src="~/adminweb/images/logo-text.png" alt="">
                     </span>
@@ -227,7 +238,7 @@
                         <li class="icons dropdown">
                             <div class="user-img c-pointer position-relative" data-toggle="dropdown">
                                 <span class="activity active"></span>
-                                <img src="images/user/1.png" height="40" width="40" alt="">
+                                <img src="~/adminweb/images/user/1.png" height="40" width="40" alt="">
                             </div>
                             <div class="drop-down dropdown-profile animated fadeIn dropdown-menu">
                                 <div class="dropdown-content-body">
@@ -269,8 +280,8 @@
                             <i class="icon-speedometer menu-icon"></i><span class="nav-text">Adverts</span>
                         </a>
                         <ul aria-expanded="false">
-                            <li><a href="/Admin/Advert/Index">Active Adverts</a></li>
-                            <li><a href="/Admin/Advert/DeleteList">Deleted Adverts</a></li>
+                            <li><a  asp-area="Admin" asp-controller="Advert" asp-action="Index">Active Adverts</a></li>
+                            <li><a  asp-area="Admin" asp-controller="Advert" asp-action="DeleteList">Deleted Adverts</a></li>
                             <!-- <li><a href="./index-2.html">Home 2</a></li> -->
                         </ul>
                     </li>
@@ -279,7 +290,7 @@
                             <i class="icon-globe-alt menu-icon"></i><span class="nav-text">All Adverts</span>
                         </a>
                         <ul aria-expanded="false">
-                            <li><a href="/Admin/Advert/Index">My Active Adverts</a></li>
+                            <li><a  asp-area="Admin" asp-controller="Advert" asp-action="Index">My Active Adverts</a></li>
                             <li><a href="./layout-one-column.html">My Deleted Adverts</a></li>
                             
                         </ul>
@@ -290,8 +301,8 @@
                             <i class="icon-envelope menu-icon"></i> <span class="nav-text">Cities</span>
                         </a>
                         <ul aria-expanded="false">
-                            <li><a href="./email-inbox.html">Active Cities</a></li>
-                           <li><a href="./email-inbox.html">Pasive Cities</a></li>
+                            <li><a asp-area="Admin" asp-controller="City" asp-action="Index" >Active Cities</a></li>
+                            <li><a href="./email-inbox.html">Pasive Cities</a></li>
                         </ul>
                     </li>
                 
@@ -300,7 +311,7 @@
                             <i class="icon-graph menu-icon"></i> <span class="nav-text">Districts</span>
                         </a>
                         <ul aria-expanded="false">
-                            <li><a href="./chart-flot.html">Active Districts</a></li>
+                            <li><a  asp-area="Admin" asp-controller="District" asp-action="Index">Active Districts</a></li>
                             <li><a href="./chart-morris.html">Pasive Districts</a></li>
                           
                         </ul>
@@ -311,7 +322,7 @@
                             <i class="icon-grid menu-icon"></i><span class="nav-text">Neighbourhoods</span>
                         </a>
                         <ul aria-expanded="false">
-                            <li><a href="./ui-accordion.html">Active Neighbourhoods</a></li>
+                            <li><a  asp-area="Admin" asp-controller="Neighbourhood" asp-action="Index">Active Neighbourhoods</a></li>
                             <li><a href="./ui-alert.html">Pasive Neighbourhoods</a></li>
                            
                         </ul>
@@ -320,10 +331,10 @@
                    
                     <li>
                         <a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                            <i class="icon-note menu-icon"></i><span class="nav-text"Advert Status</span>
+                            <i class="icon-note menu-icon"></i><span class="nav-text">Advert Status</span>
                         </a>
                         <ul aria-expanded="false">
-                            <li><a href="./form-basic.html">Active Advert Status</a></li>
+                            <li><a asp-area="Admin" asp-controller="Situation" asp-action="Index">Active Advert Status</a></li>
                             <li><a href="./form-validation.html">Pasive Advert Status</a></li>
                          
                         </ul>
@@ -334,7 +345,7 @@
                             <i class="icon-menu menu-icon"></i><span class="nav-text">Advert Types</span>
                         </a>
                         <ul aria-expanded="false">
-                            <li><a href="./table-basic.html" aria-expanded="false">Active Advert Types</a></li>
+                            <li><a asp-area="Admin" asp-controller="Type" asp-action="Index" aria-expanded="false">Active Advert Types</a></li>
                             <li><a href="./table-datatable.html" aria-expanded="false">Pasive Advert Types</a></li>
                         </ul>
                     </li>

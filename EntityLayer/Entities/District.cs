@@ -8,6 +8,9 @@ namespace EntityLayer.Entities
 {
     public class District
     {
+        public District() {
+            Neighbourhoods = new List<Neighbourhood>();
+        }
         public int DistrictId { get; set; }
         public string DistrictName { get; set; }
         public bool Status { get; set; }

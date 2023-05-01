@@ -1,0 +1,75 @@
+﻿@model List<EntityLayer.Entities.Type>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+
+@if (Model.Count == 0)
+{
+    <div class="container">
+        <div class="row">
+            <div class="alert alert-success">No Type</div>
+        </div>
+    </div>
+}
+else
+{
+    <table class="table table-bordered table table-striped" id="table">
+        <tr>
+            <th>Type Name</th>
+            <th>Situation</th>
+            <th>Delete</th>
+            <th>Edit</th>
+        </tr>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+
+                    <td>@item.TypeName</td>
+                    <td>@item.Situation.SituationName</td>
+
+                    <td><a class="btn btn-danger" id="delete" data-id="@item.TypeId">Delete</a></td>
+                    <td><a class="btn btn-warning" asp-action="Update" asp-route-id="@item.TypeId">Update</a></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+<a class="btn btn-primary" asp-action="Create">New Type</a>
+
+<script type="text/javascript">
+    $("#table").on("click", "#delete", function () {
+        var id = $(this).data("id");
+
+
+        swal({
+            title: "Are you sure delete this?",
+            text: "Advert will delete. Are you sure really?",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        })
+            .then((willDelete) => {
+                if (willDelete) {
+                    $.ajax({
+                        type="GET",
+                        url="/Admin/Type/Delete/" + id,
+
+                        success: function (response) {
+                            toastr.error("Type deleted");
+                        }
+
+                    });
+
+                    $(this).parent("td").parent("tr").remove();
+                }
+            });
+    });
+
+
+</script>
+
+

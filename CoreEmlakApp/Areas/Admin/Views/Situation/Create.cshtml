@@ -1,0 +1,74 @@
+﻿@model List<EntityLayer.Entities.Situation>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+@if (Model.Count == 0)
+{
+    <div class="container">
+        <div class="row">
+            <div class="alert alert-success">No Situation</div>
+        </div>
+    </div>
+}
+else
+{
+    <table class="table table-bordered table table-striped" id="table">
+        <tr>
+            <th>Situation Name</th>
+            <th>Delete</th>
+            <th>Edit</th>
+        </tr>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+
+                    <td>@item.SituationName</td>
+
+                    <td><a class="btn btn-danger" id="delete" data-id="@item.SituationId">Delete</a></td>
+                    <td><a asp-action="Update" asp-route-id="@item.SituationId" class="btn btn-warning">Update</a></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+<a class="btn btn-primary" asp-action="Create">New Situation</a>
+
+<script type="text/javascript">
+    $("#table").on("click", "#delete", function () {
+        var id = $(this).data("id");
+
+
+        swal({
+            title: "Are you sure delete this?",
+            text: "Situation will delete. Are you sure really?",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        })
+            .then((willDelete) => {
+                if (willDelete) {
+                    $.ajax({
+                        type="GET",
+                        url='/Admin/Situation/Delete/' + id,
+
+                        success: function () {
+                            toastr.error("Situation deleted");
+                        }
+
+                    });
+
+                    $(this).parent("td").parent("tr").remove();
+                }
+            });
+    });
+
+
+</script>
+
+
+
+

@@ -9,6 +9,11 @@ namespace EntityLayer.Entities
 {
     public class UserAdmin:IdentityUser
     {
+        public UserAdmin()
+        {
+            Adverts = new List<Advert>();
+            Types = new List<Type>();
+        }
         public string FullName { get; set; }
 
         public virtual List<Advert> Adverts { get; set; }

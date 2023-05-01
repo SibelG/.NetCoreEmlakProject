@@ -26,12 +26,15 @@ namespace BusinessLayer.Concrete
 
         public void TAdd(City p)
         {
+            p.Status = true;
             _cityRepository.TAdd(p);
         }
 
         public void TDelete(City p)
         {
-            _cityRepository.TDelete(p);
+            var city = _cityRepository.TGetById(p.CityId);
+            city.Status = false;
+            _cityRepository.TUpdate(city);
         }
 
         public City TGetById(int id)
@@ -46,7 +49,9 @@ namespace BusinessLayer.Concrete
 
         public void TUpdate(City p)
         {
-            _cityRepository.TUpdate(p);
+            var city = _cityRepository.TGetById(p.CityId);
+            city.CityName = p.CityName;
+            _cityRepository.TUpdate(city);
         }
     }
 }

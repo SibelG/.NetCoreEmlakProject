@@ -1,0 +1,32 @@
+﻿@model List<Images>
+
+<div id="slider" class="sl-slider-wrapper">
+
+  
+    <div class="sl-slider">
+        @foreach (var item in Model)
+        {
+            <div class="sl-slide" data-orientation="horizontal" data-slice1-rotation="-25" data-slice2-rotation="-25" data-slice1-scale="2" data-slice2-scale="2">
+                <div class="sl-slide-inner">
+                    <div class="bg-img background-image: url(@item.ImageName);"></div>
+                    <h2><a href="#">@item.Advert.NumberOfRooms Rooms and @item.Advert.Floor floors @item.Advert.Type.Situation.SituationName on @item.Advert.Type.TypeName</a></h2>
+                    <blockquote>
+                        <p class="location"><span class="glyphicon glyphicon-map-marker"></span>@item.Advert.Address</p>
+                        <p>@item.Advert.Description.</p>
+                        <cite>$ @item.Advert.Price</cite>
+                    </blockquote>
+                </div>
+            </div>
+        }
+
+    </div><!-- /sl-slider -->
+
+    <nav id="nav-dots" class="nav-dots">
+        <span class="nav-dot-current"></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+    </nav>
+
+</div><!-- /slider-wrapper -->

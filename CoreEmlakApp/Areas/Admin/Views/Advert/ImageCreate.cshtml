@@ -1,0 +1,26 @@
+﻿@model EntityLayer.Entities.Advert
+@{
+    ViewData["Title"] = "ImageCreate";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-6">
+                
+            <div class="form-group">
+                <form method="post" asp-action="ImageCreate" enctype="multipart/form-data" asp-antiforgery="true">
+                    <input type="hidden" asp-for="AdvertId"/>
+                    <input type="file" asp-for="Image" multiple/>
+                    <br />
+                    <button type="submit" class="btn btn-warning">Add Image</button>
+                </form>
+            </div>
+            </div>
+        
+        </div>
+    </div>
+   
+</div>
+

@@ -9,6 +9,11 @@ namespace EntityLayer.Entities
 {
     public class Type
     {
+        public Type()
+        {
+            Advert = new List<Advert>();
+        }
+
         [Key]
         public int TypeId { get; set; }
         public string TypeName { get; set; }

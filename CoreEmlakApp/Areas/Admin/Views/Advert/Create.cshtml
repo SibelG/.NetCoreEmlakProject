@@ -1,4 +1,4 @@
-﻿
+﻿@model EntityLayer.Entities.Advert
 @{
     ViewData["Title"] = "Create";
     Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
@@ -6,12 +6,12 @@
 
 <div class="container">
     <div class="row">
-        <div col-md-12>
+        <div class="col-md-12">
             <div class="col-md-6">
                 <div class="form-group">
-                    <div class="form-group">
+                 <div class="form-group">
                         <form method="post" enctype="multipart/form-data" asp-antiforgery="true">
-                            <div asp-validation-summary="ModelOnly"></div>
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                            
                             <input type="hidden" value="@ViewBag.userId"asp-for="UserAdminId"/>
                             <label>Description</label>
@@ -43,7 +43,7 @@
                             <span asp-validation-for="Credid" class="text text-danger"></span>
                             <br />
                             <label>Garage</label>
-                            <input type="text" asp-for="Garage" class="form-control" />
+                            <input type="checkbox" asp-for="Garage"  />
                             <span asp-validation-for="Garage" class="text text-danger"></span>
                             <br />
                             <label>Fireplace</label>
@@ -61,6 +61,10 @@
                              <label>Pool</label>
                             <input type="checkbox" asp-for="Pool" />
                             <span asp-validation-for="Pool" class="text text-danger"></span>
+                            <br />
+                            <label>Teras</label>
+                            <input type="checkbox" asp-for="Teras" />
+                            <span asp-validation-for="Teras" class="text text-danger"></span>
                             <br />
                             <label>AirCoordinator</label>
                             <input type="checkbox" asp-for="AirCoordinator" />
@@ -97,17 +101,22 @@
                             <select asp-for="DistrictId" id="DistrictId" class="form-control">
                                 <option value="0" selected>Select</option>
                                
-                                   <option value="DistrictId"></option>
-                                
+                                  @foreach(var item in ViewBag.district)
+                                {
+                                    <option value="@item.Value">@item.Text</option>
+                                }
 
                             </select>
                             <br />
 
                             <label>Neighbourhood</label>
-                            <select asp-for="NeighbourhoodId" id="NeighbourhoodId" class="form-control">
+                            <select asp-for="NeighboorHoodId" id="NeighbourhoodId" class="form-control">
                                 <option value="0" selected>Select</option>
 
-                                <option value="NeighbourhoodId"></option>
+                                @foreach (var item in ViewBag.neighbourhood)
+                                {
+                                    <option value="@item.Value">@item.Text</option>
+                                }
                                 
 
                             </select>
@@ -115,7 +124,7 @@
                             <label>Situation</label>
                             <select asp-for="SituationId" id="SituationId" class="form-control">
                                 <option value="0" selected>Select</option>
-                                @foreach (var item in ViewBag.situations)
+                                @foreach (var item in ViewBag.situation)
                                 {
                                     <option value="@item.Value">@item.Text</option>
                                 }
@@ -127,7 +136,10 @@
                             <select asp-for="TypeId" id="TypeId" class="form-control">
                                 <option value="0" selected>Select</option>
 
-                                <option value="TypeId"></option>
+                                @foreach (var item in ViewBag.type)
+                                {
+                                    <option value="@item.Value">@item.Text</option>
+                                }
                                 
 
                             </select>
@@ -184,7 +196,7 @@
 
                 }
 
-            })
+            });
         })
 
     });

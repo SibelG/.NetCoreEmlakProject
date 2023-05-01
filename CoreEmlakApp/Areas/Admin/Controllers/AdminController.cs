@@ -1,6 +1,7 @@
 ﻿using CoreEmlakApp.Areas.Admin.Models;
 using EntityLayer.Entities;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
@@ -42,6 +43,7 @@ namespace CoreEmlakApp.Areas.Admin.Controllers
                 return View(model);
             }
             var user = await _userManager.FindByNameAsync(model.UserName);
+           
 
             if(user == null) {
                 ModelState.AddModelError("", "UnSuccess");

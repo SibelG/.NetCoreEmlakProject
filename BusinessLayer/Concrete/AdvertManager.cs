@@ -63,7 +63,27 @@ namespace BusinessLayer.Concrete
 
         public void TUpdate(Advert p)
         {
-            _advertRepository.TUpdate(p);
+            var advert = _advertRepository.TGetById(p.AdvertId);
+            advert.Address=p.Address;
+            advert.Description=p.Description;
+            advert.BathRoomNumbers=p.BathRoomNumbers;
+            advert.PhoneNumber=p.PhoneNumber;
+            advert.NumberOfRooms=p.NumberOfRooms;
+            advert.Furniture=p.Furniture;
+            advert.Garage = p.Garage;
+            advert.Garden = p.Garden;
+            advert.Furniture = p.Furniture;
+            advert.Fireplace = p.Fireplace;
+            advert.Pool = p.Pool;
+            advert.AirCoordinator = p.AirCoordinator;
+            advert.CityId = p.CityId;
+            advert.NeighboorHoodId = p.NeighboorHoodId;
+            advert.AdvertDate = p.AdvertDate;
+            advert.DistrictId = p.DistrictId;
+            advert.Floor = p.Floor;
+            advert.Area = p.Area;
+         
+            _advertRepository.TUpdate(advert);
         }
     }
 }

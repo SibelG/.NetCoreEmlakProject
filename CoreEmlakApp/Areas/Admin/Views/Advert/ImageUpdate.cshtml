@@ -1,0 +1,29 @@
+﻿@model EntityLayer.Entities.Images
+@{
+    ViewData["Title"] = "ImageUpdate";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-6">
+
+                <div class="form-group">
+                    <form method="post"  enctype="multipart/form-data" asp-antiforgery="true">
+                        <input type="hidden" asp-for="ImageId" />
+                        <input type="file" asp-for="Image" />
+                        <br />
+                        <button type="submit" class="btn btn-warning">Update Image</button>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+

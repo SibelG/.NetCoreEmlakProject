@@ -1,3 +1,8 @@
+C:\Users\sblgn\source\repos\CoreEmlakApp\BusinessLayer\obj\Debug\net6.0\BusinessLayer.csproj.AssemblyReference.cache
+C:\Users\sblgn\source\repos\CoreEmlakApp\BusinessLayer\obj\Debug\net6.0\BusinessLayer.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\sblgn\source\repos\CoreEmlakApp\BusinessLayer\obj\Debug\net6.0\BusinessLayer.AssemblyInfoInputs.cache
+C:\Users\sblgn\source\repos\CoreEmlakApp\BusinessLayer\obj\Debug\net6.0\BusinessLayer.AssemblyInfo.cs
+C:\Users\sblgn\source\repos\CoreEmlakApp\BusinessLayer\obj\Debug\net6.0\BusinessLayer.csproj.CoreCompileInputs.cache
 C:\Users\sblgn\source\repos\CoreEmlakApp\BusinessLayer\bin\Debug\net6.0\BusinessLayer.deps.json
 C:\Users\sblgn\source\repos\CoreEmlakApp\BusinessLayer\bin\Debug\net6.0\BusinessLayer.runtimeconfig.json
 C:\Users\sblgn\source\repos\CoreEmlakApp\BusinessLayer\bin\Debug\net6.0\BusinessLayer.dll
@@ -6,11 +11,6 @@ C:\Users\sblgn\source\repos\CoreEmlakApp\BusinessLayer\bin\Debug\net6.0\DataAcce
 C:\Users\sblgn\source\repos\CoreEmlakApp\BusinessLayer\bin\Debug\net6.0\EntityLayer.dll
 C:\Users\sblgn\source\repos\CoreEmlakApp\BusinessLayer\bin\Debug\net6.0\DataAccessLayer.pdb
 C:\Users\sblgn\source\repos\CoreEmlakApp\BusinessLayer\bin\Debug\net6.0\EntityLayer.pdb
-C:\Users\sblgn\source\repos\CoreEmlakApp\BusinessLayer\obj\Debug\net6.0\BusinessLayer.csproj.AssemblyReference.cache
-C:\Users\sblgn\source\repos\CoreEmlakApp\BusinessLayer\obj\Debug\net6.0\BusinessLayer.GeneratedMSBuildEditorConfig.editorconfig
-C:\Users\sblgn\source\repos\CoreEmlakApp\BusinessLayer\obj\Debug\net6.0\BusinessLayer.AssemblyInfoInputs.cache
-C:\Users\sblgn\source\repos\CoreEmlakApp\BusinessLayer\obj\Debug\net6.0\BusinessLayer.AssemblyInfo.cs
-C:\Users\sblgn\source\repos\CoreEmlakApp\BusinessLayer\obj\Debug\net6.0\BusinessLayer.csproj.CoreCompileInputs.cache
 C:\Users\sblgn\source\repos\CoreEmlakApp\BusinessLayer\obj\Debug\net6.0\BusinessLayer.csproj.CopyComplete
 C:\Users\sblgn\source\repos\CoreEmlakApp\BusinessLayer\obj\Debug\net6.0\BusinessLayer.dll
 C:\Users\sblgn\source\repos\CoreEmlakApp\BusinessLayer\obj\Debug\net6.0\refint\BusinessLayer.dll

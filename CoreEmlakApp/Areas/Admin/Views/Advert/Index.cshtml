@@ -21,9 +21,7 @@ else
             <th>Room Count</th>
             <th>Bath Count</th>
             <th>Area</th>
-            <th>Furniture</th>
             <th>Floor</th>
-            <th>Garage</th>
             <th>Address</th>
             <th>Advert Images</th>
             <th>Delete</th>
@@ -38,47 +36,53 @@ else
                     <td>@item.NumberOfRooms</td>
                     <td>@item.BathRoomNumbers</td>
                     <td>@item.Area</td>
-                    <td>@item.Furniture</td>
                     <td>@item.Floor</td>
-                    <td>@item.Garage</td>
                     <td>@item.Address</td>
-                    <td><a class="btn btn-success" asp-action="AdvertImages" asp-route-id="@item.AdvertId">Advert Images</a></td>
-                    <td><a class="btn btn-danger" id="delete"  data-id="@item.AdvertId">Delete</a></td>
-                    <td><a class="btn btn-success" asp-action="Update" asp-route-id="@item.AdvertId">Update</a></td>
+                    <td><a class="btn btn-success" asp-action="ImageList" asp-route-id="@item.AdvertId">Advert Images</a></td>
+                    <td><a class="btn btn-info" asp-action="ImageCreate" asp-route-id="@item.AdvertId">Add Image</a></td>
+                    <td><a class="btn btn-danger"  id="delete"  data-id="@item.AdvertId">Delete</a></td>
+                    <td><a class="btn btn-warning" asp-action="Update" asp-route-id="@item.AdvertId">Update</a></td>
                 </tr>
             }
         </tbody>
     </table>
     }
-<a class="btn btn-primary" href="/Admin/Advert/Create">New Advert</a>
+<a class="btn btn-primary" asp-action="Create">New Advert</a>
 
-<script>
-    $("#table").on("click","#delete",function(){
-        var id=$(this).data("id");
+<script type="text/javascript">
 
+    $("#table").on("click", "#delete", function () {
+        var id = $(this).data("id");
 
         swal({
-            title: "Are you sure delete this?",
-            text: "Advert will delete. Are you sure really?",
-            icon: "warning",
-            buttons: true,
-            dangerMode: true,
-        })
-            .then((willDelete) => {
-                if (willDelete) {
-                    $.ajax({
-                        type="GET",
-                        url="/Admin/Advert/Delete/" + id,
-                        
-                        success: function (response) {
-                          toastr.error("Advert deleted");
-                        }
+            title: "Are you sure you want to delete?",
+            text: "If you delete it, you are ready to run away!",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonClass: "btn-danger",
+            confirmButtonText: "Yes, I will delete it!",
+            cancelButtonText: "Forget it!",   //Modify the cancel display
+            closeOnConfirm: false,
+            showLoaderOnConfirm: true  //Display page of loading waiting time
+        },
+            function () {
+                //  Send an ajax request to the backend
+                $.ajax({
+                    url: '/Admin/Advert/Delete/' + id,
+                    type: 'get',
 
-                    });
+                    success: function () {
 
-                    $(this).parent("td").parent("tr").remove();
-                }
+
+                        swal("deleted!", "Go back and pack your luggage, get ready to run!", "success");
+                        $(this).parent("td").parent("tr").remove();
+
+
+                    }
+                });
+
             });
+
     });
     
     

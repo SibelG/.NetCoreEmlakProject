@@ -73,9 +73,8 @@ namespace DataAccessLayer.Migrations
                     b.Property<bool>("Furniture")
                         .HasColumnType("bit");
 
-                    b.Property<string>("Garage")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<bool>("Garage")
+                        .HasColumnType("bit");
 
                     b.Property<bool>("Garden")
                         .HasColumnType("bit");
@@ -103,6 +102,9 @@ namespace DataAccessLayer.Migrations
                         .HasColumnType("int");
 
                     b.Property<bool>("Status")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("Teras")
                         .HasColumnType("bit");
 
                     b.Property<int>("TypeId")

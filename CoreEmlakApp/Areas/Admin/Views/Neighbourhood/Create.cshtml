@@ -1,0 +1,38 @@
+﻿@model EntityLayer.Entities.Neighbourhood
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-6">
+                
+                <div class="form-group">
+                    <form method="post" asp-antiforgery="true">
+
+                        <label>Neighbourhood Name</label>
+                        <input type="text" asp-for="NeighbourhoodName" class="form-control" />
+                        <span asp-validation-for="NeighbourhoodName" class="text-danger"></span>
+                        <br />
+                        <label>District</label>
+                        <select asp-for="DistrictId" id="DistrictId" class="form-control">
+                            <option value="0" selected>Select</option>
+                            @foreach (var item in ViewBag.districts)
+                            {
+                                <option value="@item.Value">@item.Text</option>
+                            }
+
+                        </select>
+                        <br />
+                        <button type="submit" class="btn btn-warning">Add Neighbourhoods</button>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
