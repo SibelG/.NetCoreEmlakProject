@@ -56,23 +56,30 @@ namespace CoreEmlakApp.Controllers
             ViewBag.images = images;
             return View(list);
         }
-        public IActionResult Filter(int min, int max, int cityId, int typeId, int neighbourhoodId, int situationId, string searchString)
+        public IActionResult Filter(int min, int max, int CityId, int TypeId, int NeighbourhoodId, int SituationId, string searchString,int? pageNo)
         {
 
             Dropdown();
+            int _pageNo = pageNo ?? 1;
             ViewData["CurrentFilter"] = searchString;
             var imageList = _projectImageService.List(x => x.Status == true);
-            ViewBag.imageList = imageList;
-            var filter = _projectService.List(x => x.Price >= min && x.Price <= max && x.CityId == cityId && x.TypeId == typeId && x.SituationId == situationId && x.NeighbourhoodId == neighbourhoodId);
+            ViewBag.images = imageList;
+           // var filter=_projectService.List(x=>x.CityId==CityId).ToPagedList<Projects>(_pageNo, 6);
+            var filter = _projectService.List(x => x.Price >= min && x.Price <= max && x.CityId == CityId && x.TypeId == TypeId && x.SituationId == SituationId && x.NeighbourhoodId == NeighbourhoodId).ToPagedList<Projects>(_pageNo, 6);
             if (!String.IsNullOrEmpty(searchString))
             {
-                _projectService.List(x => x.Status == true).Where(s => s.ProjectTitle.Contains(searchString)
+                filter.Where(s => s.ProjectTitle.Contains(searchString)
                                         || s.Description.Contains(searchString) || s.Type.TypeName.Contains(searchString) || s.Situation.SituationName.Contains(searchString));
             }
 
             return View(filter);
 
 
+        }
+        public PartialViewResult PartialFilter()
+        {
+            Dropdown();
+            return PartialView();
         }
         public void Dropdown()
         {

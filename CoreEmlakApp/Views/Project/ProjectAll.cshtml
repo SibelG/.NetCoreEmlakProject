@@ -77,110 +77,7 @@
                     </div>
 
                 </div>
-               @* <div class="row">
-
-                    @foreach (var item in Model)
-                    {
-                        var c = 1;
-                        <div class="col-lg-4 col-sm-6">
-                            <div class="properties">
-                                <div class="image-holder">
-                                    @foreach (var rsm in ViewBag.images)
-                                    {
-                                        if (rsm.ProjectId == item.ProjectId)
-                                        {
-                                            if (@c == 1)
-                                            {
-                                                <img src="~/imgProject/@rsm.ImageName" class="img-responsive" alt="properties" />
-                                            }
-                                            c++;
-
-                                        }
-
-                                    }
-                                    <div class="status sold">@item.Situation.SituationName</div>
-                                </div>
-                                <h4><a href="property-detail.php">@item.Neighbourhood.District.City.CityName</a></h4>
-                                <p class="price">Price: @item.Price ₺</p>
-                                <div class="listing-detail1"><span data-toggle="tooltip" data-placement="bottom" data-original-title="Bed Room">Room</span> <span data-toggle="tooltip" data-placement="bottom" data-original-title="Living Room">Bath</span> <span data-toggle="tooltip" data-placement="bottom" data-original-title="Parking">Floor</span> <span data-toggle="tooltip" data-placement="bottom" data-original-title="Kitchen">Area</span> </div>
-                                <div class="listing-detail"><span data-toggle="tooltip" data-placement="bottom" data-original-title="Bed Room">@item.NumberOfRooms</span> <span data-toggle="tooltip" data-placement="bottom" data-original-title="Living Room">@item.BathRoomNumbers</span> <span data-toggle="tooltip" data-placement="bottom" data-original-title="Parking">@item.Floor</span> <span data-toggle="tooltip" data-placement="bottom" data-original-title="Kitchen">@item.Area m2</span> </div>
-                                <a class="btn btn-primary" asp-controller="Project" asp-action="PropertyDetails" asp-route-id="@item.ProjectId">View Details</a>
-                            </div>
-                        </div>
-                    }
-                    <!-- properties -->
-                    <!-- properties -->
-                    <div class="center">
-                        <ul class="pagination">
-                            <li><a href="#">«</a></li>
-                            <li><a href="#">1</a></li>
-                            <li><a href="#">2</a></li>
-                            <li><a href="#">3</a></li>
-                            <li><a href="#">4</a></li>
-                            <li><a href="#">5</a></li>
-                            <li><a href="#">»</a></li>
-                        </ul>
-                    </div>
-
-                </div>*@
-              @*  <div data-v-aa5dd298="" data-v-76fa860a="" data-v-6353d5cf="" class="he-realty-card project-listing-realty-card project-listing-realty-list__card he-realty-card--visited">
-                    <div data-v-b40047fa="" data-v-aa5dd298="" class="he-realty-card-thumbnail he-realty-card__thumbnail">
-                        <!----> <span data-v-b40047fa="" data-conversion-source="" class="he-realty-card-thumbnail__favorite"><span data-v-b40047fa="" class="he-icon he-realty-card-thumbnail__favorite-toggle he-icon--favorite_border"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M0 0h24v24H0z" fill="none"></path><path d="M16.5 3c-1.74 0-3.41.81-4.5 2.09C10.91 3.81 9.24 3 7.5 3 4.42 3 2 5.42 2 8.5c0 3.78 3.4 6.86 8.55 11.54L12 21.35l1.45-1.32C18.6 15.36 22 12.28 22 8.5 22 5.42 19.58 3 16.5 3zm-4.4 15.55l-.1.1-.1-.1C7.14 14.24 4 11.39 4 8.5 4 6.5 5.5 5 7.5 5c1.54 0 3.04.99 3.57 2.36h1.87C13.46 5.99 14.96 5 16.5 5c2 0 3.5 1.5 3.5 3.5 0 2.89-3.14 5.74-7.9 10.05z"></path></svg></span></span> <img data-v-b40047fa="" src="https://cdn02.hemlak.com/mncropresize/182/137/eDY1bVRkOWNuaWE5VUZJbUtTeHV2ODFqSThiYXdtb2sxaWEvaUo1ZjM3K0o4cHRuemlaNHNOcUZUdlp0ZFRjWg==.jpg" decoding="async" data-lazy-disabled="true" class="he-lazy-image he-realty-card-thumbnail__image he-lazy-image--passive"> <div data-v-e18a5ac8="" data-v-b40047fa="" class="he-realty-card-badge he-realty-card-badge--red">
-                            <span data-v-e18a5ac8="" class="he-icon he-realty-card-badge__icon he-icon--campaign_alt"><svg xmlns="http://www.w3.org/2000/svg"><g fill="#FFF" fill-rule="nonzero"><path d="M12.8 6.087c0 .44.36.8.8.8h1.6c.44 0 .8-.36.8-.8 0-.44-.36-.8-.8-.8h-1.6c-.44 0-.8.36-.8.8zM11.672 9.943a.773.773 0 0 0 .16 1.096c.424.312.872.648 1.296.968a.782.782 0 0 0 1.104-.16c0-.008.008-.008.008-.016a.782.782 0 0 0-.16-1.104c-.424-.32-.872-.656-1.288-.968a.794.794 0 0 0-1.112.168c0 .008-.008.016-.008.016zM14.248.335c0-.008-.008-.008-.008-.016a.784.784 0 0 0-1.104-.16c-.424.32-.88.656-1.296.976a.783.783 0 0 0-.152 1.104c0 .008.008.008.008.016a.783.783 0 0 0 1.104.16c.424-.312.872-.656 1.296-.976a.795.795 0 0 0 .152-1.104zM4.8 3.687H1.6c-.88 0-1.6.72-1.6 1.6v1.6c0 .88.72 1.6 1.6 1.6h.8v2.4c0 .44.36.8.8.8.44 0 .8-.36.8-.8v-2.4h.8l4 2.4v-9.6l-4 2.4zM10.8 6.087a3.584 3.584 0 0 0-1.2-2.68V8.76a3.554 3.554 0 0 0 1.2-2.672z"></path></g></svg></span> <div data-v-e18a5ac8="" class="he-realty-card-badge__text">
-                                Kampanya
-                            </div>
-                        </div> <span data-v-b40047fa="" class="he-realty-card-thumbnail__badge-list">
-                            <span data-v-b40047fa="" class="he-realty-card-thumbnail__spec-badge">
-                                <span data-v-b40047fa="" class="he-icon he-realty-card-thumbnail__spec-badge-icon he-icon--photo"><svg viewBox="0 0 20 18" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 2H5L7 0H13L15 2H18C18.5304 2 19.0391 2.21071 19.4142 2.58579C19.7893 2.96086 20 3.46957 20 4V16C20 16.5304 19.7893 17.0391 19.4142 17.4142C19.0391 17.7893 18.5304 18 18 18H2C1.46957 18 0.960859 17.7893 0.585786 17.4142C0.210714 17.0391 0 16.5304 0 16V4C0 3.46957 0.210714 2.96086 0.585786 2.58579C0.960859 2.21071 1.46957 2 2 2ZM10 5C8.67392 5 7.40215 5.52678 6.46447 6.46447C5.52678 7.40215 5 8.67392 5 10C5 11.3261 5.52678 12.5979 6.46447 13.5355C7.40215 14.4732 8.67392 15 10 15C11.3261 15 12.5979 14.4732 13.5355 13.5355C14.4732 12.5979 15 11.3261 15 10C15 8.67392 14.4732 7.40215 13.5355 6.46447C12.5979 5.52678 11.3261 5 10 5ZM10 7C10.7956 7 11.5587 7.31607 12.1213 7.87868C12.6839 8.44129 13 9.20435 13 10C13 10.7956 12.6839 11.5587 12.1213 12.1213C11.5587 12.6839 10.7956 13 10 13C9.20435 13 8.44129 12.6839 7.87868 12.1213C7.31607 11.5587 7 10.7956 7 10C7 9.20435 7.31607 8.44129 7.87868 7.87868C8.44129 7.31607 9.20435 7 10 7Z" fill="currentColor"></path></svg></span> <span data-v-b40047fa="" class="he-realty-card-thumbnail__spec-badge-text">
-                                    8
-                                </span>
-                            </span>
-                        </span>
-                    </div> <div data-v-115a44dc="" data-v-aa5dd298="" class="he-realty-card-info he-realty-card__info">
-                        <div data-v-115a44dc="" class="he-realty-card-info__head">
-                            <div data-v-115a44dc="" class="he-realty-card-info__description">
-                                <span data-v-76fa860a="" data-v-115a44dc="" class="project-listing-realty-card__description">
-                                    Lagom
-                                </span>
-                            </div> <div data-v-115a44dc="" class="he-realty-card-info__listing-date">
-                                2025 - 2. Çeyrek
-                            </div>
-                        </div> <ul data-v-cfe36724="" data-v-aa5dd298="" class="he-realty-card-attributes" data-v-115a44dc="">
-                            <li data-v-cfe36724="" class="he-realty-card-attributes__attribute">
-                                <!---->
-                                52 - 113 m²
-                            </li>
-                            <li data-v-cfe36724="" class="he-realty-card-attributes__attribute">
-                                <!---->
-                                1 + 1
-                            </li>
-                            <li data-v-cfe36724="" class="he-realty-card-attributes__attribute">
-                                <!---->
-                                2 + 1
-                            </li>
-                            <li data-v-cfe36724="" class="he-realty-card-attributes__attribute">
-                                <!---->
-                                3 + 1
-                            </li>
-                        </ul> <div data-v-115a44dc="" class="he-realty-card-info__title">
-                            <span data-v-d99bff2c="" data-v-76fa860a="" class="project-listing-realty-card-title project-listing-realty-card__title" data-v-115a44dc="">
-                                <span data-v-d99bff2c="" class="project-listing-realty-card-title__min-price">
-                                    1.269.000 TL 'den
-                                </span>
-                            </span>
-                        </div> <!----> <!----> <div data-v-c4a429e0="" data-v-115a44dc="" class="he-realty-card-footer he-realty-card-info__footer">
-                            <div data-v-a8b99092="" data-v-c4a429e0="" class="he-realty-card-info__lead-form-button">
-                                <div data-v-a8b99092="" data-conversion-source="" class="he-realty-card-info__lead-form-button__btn">
-                                    Fiyat Öğren
-                                </div>
-                            </div> <div data-v-c4a429e0="" class="he-realty-card-footer__location">
-                                <span data-v-c4a429e0="" class="he-icon he-realty-card-footer__location-icon he-icon--location"><svg viewBox="0 0 10 13" fill="none" xmlns="http://www.w3.org/2000/svg"><g clip-path="url(#clip0)"><path d="M4.55 0C2.0345 0 0 2.0345 0 4.55C0 7.9625 4.55 13 4.55 13C4.55 13 9.1 7.9625 9.1 4.55C9.1 2.0345 7.0655 0 4.55 0ZM4.55 6.175C3.653 6.175 2.925 5.447 2.925 4.55C2.925 3.653 3.653 2.925 4.55 2.925C5.447 2.925 6.175 3.653 6.175 4.55C6.175 5.447 5.447 6.175 4.55 6.175Z" fill="#9F9F9F"></path></g><defs><clipPath id="clip0"><rect width="9.1" height="13" fill="white"></rect></clipPath></defs></svg></span> <div data-v-115a44dc="" data-v-c4a429e0="" class="he-realty-card-info__location">
-                                    Ankara, Sincan, Saraycık
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>*@
+            
                 @foreach (var item in Model)
                 {
                     var c = 1;
@@ -247,8 +144,6 @@
     
     </div>
 </div>
-@* display: flex;
-            justify-content: center;
-            align-items: center;*@
+
 
 

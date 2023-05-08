@@ -224,6 +224,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWR2ZXJ0XEFkdmVydFNhbGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/sblgn/source/repos/CoreEmlakApp/CoreEmlakApp/Views/Advert/Filter.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWR2ZXJ0XEZpbHRlci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/sblgn/source/repos/CoreEmlakApp/CoreEmlakApp/Views/Advert/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWR2ZXJ0XEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
@@ -242,6 +246,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/sblgn/source/repos/CoreEmlakApp/CoreEmlakApp/Views/Home/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/sblgn/source/repos/CoreEmlakApp/CoreEmlakApp/Views/Project/Filter.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvamVjdFxGaWx0ZXIuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/sblgn/source/repos/CoreEmlakApp/CoreEmlakApp/Views/Project/PartialFilter.cshtml]
