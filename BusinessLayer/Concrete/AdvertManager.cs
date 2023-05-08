@@ -77,7 +77,8 @@ namespace BusinessLayer.Concrete
             advert.Pool = p.Pool;
             advert.AirCoordinator = p.AirCoordinator;
             advert.CityId = p.CityId;
-            advert.NeighboorHoodId = p.NeighboorHoodId;
+            advert.NeighbourhoodId = p.NeighbourhoodId;
+            advert.TypeId = p.TypeId;
             advert.AdvertDate = p.AdvertDate;
             advert.DistrictId = p.DistrictId;
             advert.Floor = p.Floor;

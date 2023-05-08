@@ -5,15 +5,15 @@ namespace CoreEmlakApp.ViewComponents
 {
     public class AdvertSlider:ViewComponent
     {
-        private ImagesService _imagesService;
+        private ProjectImageService _projectImageService;
 
-        public AdvertSlider(ImagesService imagesService)
+        public AdvertSlider(ProjectImageService projectImageService)
         {
-            _imagesService = imagesService;
+            _projectImageService = projectImageService;
         }
         public IViewComponentResult Invoke()
         {
-            var list = _imagesService.List(x => x.Status == true);
+            var list = _projectImageService.List(x => x.Status == true);
             return View(list);
         }
     }

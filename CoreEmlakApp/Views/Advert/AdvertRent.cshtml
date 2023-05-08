@@ -1,0 +1,128 @@
+﻿@model List<Advert>
+@{
+    ViewData["Title"] = "AdvertRent";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="inside-banner">
+    <div class="container">
+        <span class="pull-right"><a href="index.php">Home</a> / Buy, Sale & Rent</span>
+        <h2>Buy, Sale & Rent</h2>
+    </div>
+</div>
+<!-- banner -->
+
+
+<div class="container">
+    <div class="properties-listing spacer">
+
+        <div class="row">
+            <div class="col-lg-3 col-sm-4 ">
+
+                @await Html.PartialAsync("~/Views/Advert/PartialFilter.cshtml");
+
+
+
+                <div class="hot-properties hidden-xs">
+                    <h4>Hot Properties</h4>
+                    <div class="row">
+                        <div class="col-lg-4 col-sm-5"><img src="images/properties/1.jpg" class="img-responsive img-circle" alt="properties"></div>
+                        <div class="col-lg-8 col-sm-7">
+                            <h5><a href="property-detail.php">Integer sed porta quam</a></h5>
+                            <p class="price">$300,000</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-4 col-sm-5"><img src="images/properties/1.jpg" class="img-responsive img-circle" alt="properties"></div>
+                        <div class="col-lg-8 col-sm-7">
+                            <h5><a href="property-detail.php">Integer sed porta quam</a></h5>
+                            <p class="price">$300,000</p>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-4 col-sm-5"><img src="images/properties/1.jpg" class="img-responsive img-circle" alt="properties"></div>
+                        <div class="col-lg-8 col-sm-7">
+                            <h5><a href="property-detail.php">Integer sed porta quam</a></h5>
+                            <p class="price">$300,000</p>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-4 col-sm-5"><img src="images/properties/1.jpg" class="img-responsive img-circle" alt="properties"></div>
+                        <div class="col-lg-8 col-sm-7">
+                            <h5><a href="property-detail.php">Integer sed porta quam</a></h5>
+                            <p class="price">$300,000</p>
+                        </div>
+                    </div>
+
+                </div>
+
+
+            </div>
+
+            <div class="col-lg-9 col-sm-8">
+                <div class="sortby clearfix">
+                    <div class="pull-left result">Showing: ViewBag.count </div>
+                    <div class="pull-right">
+                        <select class="form-control">
+                            <option>Sort by</option>
+                            <option>Price: Low to High</option>
+                            <option>Price: High to Low</option>
+                        </select>
+                    </div>
+
+                </div>
+                <div class="row">
+
+                    @foreach(var item in Model)
+                    {
+                        var c = 1;
+                        <div class="col-lg-4 col-sm-6">
+                            <div class="properties">
+                                <div class="image-holder">
+                                    @foreach (var rsm in ViewBag.images)
+                                    {
+                                        if (rsm.AdvertId == item.AdvertId)
+                                        {
+                                            if (@c == 1)
+                                            {
+                                                <img src="~/img/@rsm.ImageName" class="img-responsive" alt="properties" />
+                                            }
+                                            c++;
+
+                                        }
+
+                                    }
+                                    <div class="status sold">@item.Situation.SituationName</div>
+                                </div>
+                                <h4><a href="property-detail.php">@item.Neighbourhood.District.City.CityName</a></h4>
+                                <p class="price">Price: @item.Price ₺</p>
+                                <div class="listing-detail1"><span data-toggle="tooltip" data-placement="bottom" data-original-title="Bed Room">Room</span> <span data-toggle="tooltip" data-placement="bottom" data-original-title="Living Room">Bath</span> <span data-toggle="tooltip" data-placement="bottom" data-original-title="Parking">Floor</span> <span data-toggle="tooltip" data-placement="bottom" data-original-title="Kitchen">Area</span> </div>
+                                <div class="listing-detail"><span data-toggle="tooltip" data-placement="bottom" data-original-title="Bed Room">@item.NumberOfRooms</span> <span data-toggle="tooltip" data-placement="bottom" data-original-title="Living Room">@item.BathRoomNumbers</span> <span data-toggle="tooltip" data-placement="bottom" data-original-title="Parking">@item.Floor</span> <span data-toggle="tooltip" data-placement="bottom" data-original-title="Kitchen">@item.Area m2</span> </div>
+                                <a class="btn btn-primary" asp-controller="Advert" asp-action="PropertyDetails" asp-route-id="@item.AdvertId">View Details</a>
+                            </div>
+                        </div>
+                    }
+                    <!-- properties -->
+                    
+                   
+                    <!-- properties -->
+                    <div class="center">
+                        <ul class="pagination">
+                            <li><a href="#">«</a></li>
+                            <li><a href="#">1</a></li>
+                            <li><a href="#">2</a></li>
+                            <li><a href="#">3</a></li>
+                            <li><a href="#">4</a></li>
+                            <li><a href="#">5</a></li>
+                            <li><a href="#">»</a></li>
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

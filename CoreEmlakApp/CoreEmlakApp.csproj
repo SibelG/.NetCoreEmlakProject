@@ -7,15 +7,17 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Remove="Views\Shared\Components\AdvertAll\Default.cshtml" />
+    <None Remove="Areas\User\Views\Advert\Index1.html" />
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Include="Views\Shared\Components\AdvertAll\Default.cshtml" />
+    <Content Include="Areas\User\Views\Advert\Index1.html" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="FluentValidation" Version="10.4.0" />
+    <PackageReference Include="Mapster" Version="6.5.1" />
+    <PackageReference Include="Microsoft.AspNet.Mvc" Version="5.2.9" />
     <PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.2.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.16" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.16">
@@ -29,7 +31,9 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.13" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.3.0" />
+    <PackageReference Include="X.PagedList.Mvc.Core" Version="8.0.5" />
   </ItemGroup>
 
   <ItemGroup>
@@ -41,9 +45,9 @@
   <ItemGroup>
     <Folder Include="Areas\Admin\Data\" />
     <Folder Include="Areas\User\Data\" />
-    <Folder Include="Controllers\" />
     <Folder Include="Models\" />
     <Folder Include="wwwroot\img\" />
+    <Folder Include="wwwroot\imgProject\" />
   </ItemGroup>
 
 </Project>

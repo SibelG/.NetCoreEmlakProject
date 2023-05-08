@@ -1,0 +1,9 @@
+﻿<option value="">Type District</option>
+
+@if (ViewBag.neighbour != null)
+{
+    @foreach (var item in ViewBag.neighbour)
+    {
+        <option value="@item.Value">@item.Text</option>
+    }
+}

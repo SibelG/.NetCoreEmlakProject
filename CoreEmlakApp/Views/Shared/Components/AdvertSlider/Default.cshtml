@@ -1,4 +1,4 @@
-﻿@model List<Images>
+﻿@model List<ProjectImage>
 
 <div id="slider" class="sl-slider-wrapper">
 
@@ -9,11 +9,11 @@
             <div class="sl-slide" data-orientation="horizontal" data-slice1-rotation="-25" data-slice2-rotation="-25" data-slice1-scale="2" data-slice2-scale="2">
                 <div class="sl-slide-inner">
                     <div class="bg-img background-image: url(@item.ImageName);"></div>
-                    <h2><a href="#">@item.Advert.NumberOfRooms Rooms and @item.Advert.Floor floors @item.Advert.Type.Situation.SituationName on @item.Advert.Type.TypeName</a></h2>
+                    <h2><a href="#">@item.Project.NumberOfRooms Rooms and @item.Project.FloorCount Floor @item.Project.Situation.SituationName on @item.Project.Type.TypeName</a></h2>
                     <blockquote>
-                        <p class="location"><span class="glyphicon glyphicon-map-marker"></span>@item.Advert.Address</p>
-                        <p>@item.Advert.Description.</p>
-                        <cite>$ @item.Advert.Price</cite>
+                        <p class="location"><span class="glyphicon glyphicon-map-marker"></span>@item.Project.Address</p>
+                        <p>@item.Project.Description.Substring(0,100)...</p>
+                        <cite>$ @item.Project.Price</cite>
                     </blockquote>
                 </div>
             </div>

@@ -1,12 +1,16 @@
 ﻿using CoreEmlakApp.Areas.User.Models;
 using EntityLayer.Entities;
+using Mapster;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using NuGet.DependencyResolver;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Web.Razor.Generator;
 
 namespace CoreEmlakApp.Areas.User.Controllers
 {
@@ -28,6 +32,143 @@ namespace CoreEmlakApp.Areas.User.Controllers
         public IActionResult Index()
         {
             return View(new LoginModel());
+        }
+        public IActionResult ChangePassword()
+        {
+            return View(new ChangePasswordModel());
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ChangePassword(ChangePasswordModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                UserAdmin user = await _userManager.FindByNameAsync(User.Identity.Name); 
+                bool exist = await _userManager.CheckPasswordAsync(user, model.OldPassword);
+
+                if (exist)
+                {
+                    IdentityResult result = await _userManager.ChangePasswordAsync(user, model.OldPassword, model.NewPassword);
+
+                    if (result.Succeeded)
+                    {
+                        await _userManager.UpdateSecurityStampAsync(user);
+                        await _signInManager.SignOutAsync();
+                        await _signInManager.PasswordSignInAsync(user,model.NewPassword,true, true);
+
+                        ViewBag.success = "Password changed with success";
+
+                    }
+                    else
+                    {
+                       
+                         ModelState.AddModelError("", "An Error Occurred");
+                        
+                    }
+                
+                
+                }
+            }
+
+            return View();
+        }
+
+        public IActionResult ResetPassword()
+        {
+            return View(new ResetPasswordModel());
+        }
+
+        public async Task<IActionResult> ResetPassword(ResetPasswordModel model)
+        {
+            UserAdmin user = await _userManager.FindByEmailAsync(model.Email);
+            if (user != null)
+            {
+                string resetToken = await _userManager.GeneratePasswordResetTokenAsync(user);
+                string passwordResetLink = Url.Action("UpdatePassword", "User", new { userId = user.Id, token = resetToken },HttpContext.Request.Scheme);
+                MailHelper.ResetPassword.PasswordSendMail(passwordResetLink);
+                ViewBag.state = true;
+
+            }
+            else
+            {
+                ViewBag.state = false;
+            }
+            return View();
+
+
+        }
+
+        public IActionResult UpdatePassword(string userId,string token)
+        {
+            TempData["userId"] = userId;
+            TempData["token"] = token;
+            return View();
+        }
+
+        public async Task<IActionResult> UpdatePassword([Bind("NewPassword")] ResetPasswordModel model)
+        {
+            string token = TempData["token"].ToString();
+            string userId = TempData["userId"].ToString();
+
+            UserAdmin user = await _userManager.FindByIdAsync(userId);  
+            if(user != null)
+            {
+                IdentityResult result = await _userManager.ResetPasswordAsync(user, token, model.NewPassword);
+                if (result.Succeeded)
+                {
+                    await _userManager.UpdateSecurityStampAsync(user);
+                    TempData["Success"] = "Update with succeed";
+                }
+            }
+            else
+            {
+                ModelState.AddModelError("", "There isn't such a user");
+            }
+            return View();
+
+        }
+        public IActionResult Profile()
+        {
+            var user = _userManager.FindByNameAsync(User.Identity.Name);
+            RegisterModel userViewModel = user.Adapt<RegisterModel>();
+            return View(user);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Profile(RegisterModel model)
+        {
+            ModelState.Remove("Password");
+            ModelState.Remove("RePassword");
+
+            if (ModelState.IsValid)
+            {
+                UserAdmin user = await _userManager.FindByNameAsync(User.Identity.Name);
+                user.FullName = model.FullName;
+                user.UserName = model.UserName;
+                user.Email = model.Email;
+
+                IdentityResult result = await _userManager.UpdateAsync(user);
+
+                if (result.Succeeded)
+                {
+                    await _userManager.UpdateSecurityStampAsync(user);
+
+                    await _signInManager.SignOutAsync();
+                    await _signInManager.SignInAsync(user, true);
+
+                    ViewBag.success = "User Information updated with success";
+
+                }
+                else
+                {
+                    foreach(var item in result.Errors)
+                    {
+                        ModelState.AddModelError("", item.Description);
+                    }
+                }
+            }
+            return View(model);
         }
         [AllowAnonymous]
         public IActionResult Login()

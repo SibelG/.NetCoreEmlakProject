@@ -47,15 +47,26 @@ namespace DataAccessLayer.Migrations
                     b.Property<int>("Area")
                         .HasColumnType("int");
 
+                    b.Property<bool>("AuthorizedOffice")
+                        .HasColumnType("bit");
+
                     b.Property<int>("BathRoomNumbers")
                         .HasColumnType("int");
 
-                    b.Property<string>("CityId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("BuildingAge")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CategoryId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CityId")
+                        .HasColumnType("int");
 
                     b.Property<bool>("Credid")
                         .HasColumnType("bit");
+
+                    b.Property<decimal>("Deposit")
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -70,6 +81,12 @@ namespace DataAccessLayer.Migrations
                     b.Property<int>("Floor")
                         .HasColumnType("int");
 
+                    b.Property<int>("FrontId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("FuelTypeId")
+                        .HasColumnType("int");
+
                     b.Property<bool>("Furniture")
                         .HasColumnType("bit");
 
@@ -79,7 +96,7 @@ namespace DataAccessLayer.Migrations
                     b.Property<bool>("Garden")
                         .HasColumnType("bit");
 
-                    b.Property<int>("NeighboorHoodId")
+                    b.Property<int>("LivingRoomCount")
                         .HasColumnType("int");
 
                     b.Property<int>("NeighbourhoodId")
@@ -104,25 +121,60 @@ namespace DataAccessLayer.Migrations
                     b.Property<bool>("Status")
                         .HasColumnType("bit");
 
+                    b.Property<decimal>("Subscription")
+                        .HasColumnType("decimal(18,2)");
+
                     b.Property<bool>("Teras")
                         .HasColumnType("bit");
 
                     b.Property<int>("TypeId")
                         .HasColumnType("int");
 
+                    b.Property<bool>("UseCase")
+                        .HasColumnType("bit");
+
                     b.Property<string>("UserAdminId")
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
+                    b.Property<bool>("VideoBrowsing")
+                        .HasColumnType("bit");
+
                     b.HasKey("AdvertId");
 
+                    b.HasIndex("FrontId");
+
+                    b.HasIndex("FuelTypeId");
+
                     b.HasIndex("NeighbourhoodId");
+
+                    b.HasIndex("SituationId");
 
                     b.HasIndex("TypeId");
 
                     b.HasIndex("UserAdminId");
 
                     b.ToTable("Adverts");
+                });
+
+            modelBuilder.Entity("EntityLayer.Entities.Category", b =>
+                {
+                    b.Property<int>("CategoryId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CategoryId"), 1L, 1);
+
+                    b.Property<string>("CategoryName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("Status")
+                        .HasColumnType("bit");
+
+                    b.HasKey("CategoryId");
+
+                    b.ToTable("Categories");
                 });
 
             modelBuilder.Entity("EntityLayer.Entities.City", b =>
@@ -170,6 +222,46 @@ namespace DataAccessLayer.Migrations
                     b.ToTable("Districts");
                 });
 
+            modelBuilder.Entity("EntityLayer.Entities.Front", b =>
+                {
+                    b.Property<int>("FrontId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("FrontId"), 1L, 1);
+
+                    b.Property<string>("FrontName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("Status")
+                        .HasColumnType("bit");
+
+                    b.HasKey("FrontId");
+
+                    b.ToTable("Fronts");
+                });
+
+            modelBuilder.Entity("EntityLayer.Entities.FuelType", b =>
+                {
+                    b.Property<int>("FuelTypeId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("FuelTypeId"), 1L, 1);
+
+                    b.Property<string>("FuelTypeName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("Status")
+                        .HasColumnType("bit");
+
+                    b.HasKey("FuelTypeId");
+
+                    b.ToTable("FuelTypes");
+                });
+
             modelBuilder.Entity("EntityLayer.Entities.GeneralSettings", b =>
                 {
                     b.Property<int>("GenerationSettingsId")
@@ -193,6 +285,26 @@ namespace DataAccessLayer.Migrations
                     b.HasKey("GenerationSettingsId");
 
                     b.ToTable("GeneralSettings");
+                });
+
+            modelBuilder.Entity("EntityLayer.Entities.Heading", b =>
+                {
+                    b.Property<int>("HeadingId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("HeadingId"), 1L, 1);
+
+                    b.Property<string>("HeadingName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("Status")
+                        .HasColumnType("bit");
+
+                    b.HasKey("HeadingId");
+
+                    b.ToTable("Headings");
                 });
 
             modelBuilder.Entity("EntityLayer.Entities.Images", b =>
@@ -245,6 +357,133 @@ namespace DataAccessLayer.Migrations
                     b.ToTable("Neighbourhoods");
                 });
 
+            modelBuilder.Entity("EntityLayer.Entities.ProjectImage", b =>
+                {
+                    b.Property<int>("ProjectImageId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ProjectImageId"), 1L, 1);
+
+                    b.Property<string>("ImageName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("ProjectId")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("Status")
+                        .HasColumnType("bit");
+
+                    b.HasKey("ProjectImageId");
+
+                    b.HasIndex("ProjectId");
+
+                    b.ToTable("ProjectImages");
+                });
+
+            modelBuilder.Entity("EntityLayer.Entities.Projects", b =>
+                {
+                    b.Property<int>("ProjectId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ProjectId"), 1L, 1);
+
+                    b.Property<string>("Address")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Area")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("BuildingDelivery")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("CarPark")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("CategoryId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CityId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("DeliveryDate")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("DistrictId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Elevator")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FloorCount")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("HeadingId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("NeighbourhoodId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("NumberOfRooms")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("ProjectCompany")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ProjectTitle")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("SituationId")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("Status")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("TypeCount")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("TypeId")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("UseCase")
+                        .HasColumnType("bit");
+
+                    b.HasKey("ProjectId");
+
+                    b.HasIndex("CityId");
+
+                    b.HasIndex("DistrictId");
+
+                    b.HasIndex("HeadingId");
+
+                    b.HasIndex("NeighbourhoodId");
+
+                    b.HasIndex("SituationId");
+
+                    b.HasIndex("TypeId");
+
+                    b.ToTable("Projects");
+                });
+
             modelBuilder.Entity("EntityLayer.Entities.Situation", b =>
                 {
                     b.Property<int>("SituationId")
@@ -273,7 +512,7 @@ namespace DataAccessLayer.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("TypeId"), 1L, 1);
 
-                    b.Property<int>("SituationId")
+                    b.Property<int>("CategoryId")
                         .HasColumnType("int");
 
                     b.Property<bool>("Status")
@@ -288,7 +527,7 @@ namespace DataAccessLayer.Migrations
 
                     b.HasKey("TypeId");
 
-                    b.HasIndex("SituationId");
+                    b.HasIndex("CategoryId");
 
                     b.HasIndex("UserAdminId");
 
@@ -499,9 +738,27 @@ namespace DataAccessLayer.Migrations
 
             modelBuilder.Entity("EntityLayer.Entities.Advert", b =>
                 {
+                    b.HasOne("EntityLayer.Entities.Front", "Front")
+                        .WithMany()
+                        .HasForeignKey("FrontId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("EntityLayer.Entities.FuelType", "FuelType")
+                        .WithMany()
+                        .HasForeignKey("FuelTypeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("EntityLayer.Entities.Neighbourhood", "Neighbourhood")
                         .WithMany()
                         .HasForeignKey("NeighbourhoodId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("EntityLayer.Entities.Situation", "Situation")
+                        .WithMany()
+                        .HasForeignKey("SituationId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -517,7 +774,13 @@ namespace DataAccessLayer.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.Navigation("Front");
+
+                    b.Navigation("FuelType");
+
                     b.Navigation("Neighbourhood");
+
+                    b.Navigation("Situation");
 
                     b.Navigation("Type");
 
@@ -557,11 +820,73 @@ namespace DataAccessLayer.Migrations
                     b.Navigation("District");
                 });
 
-            modelBuilder.Entity("EntityLayer.Entities.Type", b =>
+            modelBuilder.Entity("EntityLayer.Entities.ProjectImage", b =>
                 {
+                    b.HasOne("EntityLayer.Entities.Projects", "Project")
+                        .WithMany("Images")
+                        .HasForeignKey("ProjectId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Project");
+                });
+
+            modelBuilder.Entity("EntityLayer.Entities.Projects", b =>
+                {
+                    b.HasOne("EntityLayer.Entities.City", "City")
+                        .WithMany()
+                        .HasForeignKey("CityId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("EntityLayer.Entities.District", "District")
+                        .WithMany()
+                        .HasForeignKey("DistrictId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("EntityLayer.Entities.Heading", "Heading")
+                        .WithMany()
+                        .HasForeignKey("HeadingId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("EntityLayer.Entities.Neighbourhood", "Neighbourhood")
+                        .WithMany()
+                        .HasForeignKey("NeighbourhoodId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("EntityLayer.Entities.Situation", "Situation")
                         .WithMany()
                         .HasForeignKey("SituationId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("EntityLayer.Entities.Type", "Type")
+                        .WithMany()
+                        .HasForeignKey("TypeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("City");
+
+                    b.Navigation("District");
+
+                    b.Navigation("Heading");
+
+                    b.Navigation("Neighbourhood");
+
+                    b.Navigation("Situation");
+
+                    b.Navigation("Type");
+                });
+
+            modelBuilder.Entity("EntityLayer.Entities.Type", b =>
+                {
+                    b.HasOne("EntityLayer.Entities.Category", "Category")
+                        .WithMany("Types")
+                        .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -569,7 +894,7 @@ namespace DataAccessLayer.Migrations
                         .WithMany("Types")
                         .HasForeignKey("UserAdminId");
 
-                    b.Navigation("Situation");
+                    b.Navigation("Category");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -628,6 +953,11 @@ namespace DataAccessLayer.Migrations
                     b.Navigation("Images");
                 });
 
+            modelBuilder.Entity("EntityLayer.Entities.Category", b =>
+                {
+                    b.Navigation("Types");
+                });
+
             modelBuilder.Entity("EntityLayer.Entities.City", b =>
                 {
                     b.Navigation("Districts");
@@ -636,6 +966,11 @@ namespace DataAccessLayer.Migrations
             modelBuilder.Entity("EntityLayer.Entities.District", b =>
                 {
                     b.Navigation("Neighbourhoods");
+                });
+
+            modelBuilder.Entity("EntityLayer.Entities.Projects", b =>
+                {
+                    b.Navigation("Images");
                 });
 
             modelBuilder.Entity("EntityLayer.Entities.Type", b =>

@@ -1,0 +1,462 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="">
+
+   @await Component.InvokeAsync("AdvertSlider") 
+   @* <div id="slider" class="sl-slider-wrapper">
+
+        <div class="sl-slider">
+
+            <div class="sl-slide" data-orientation="horizontal" data-slice1-rotation="-25" data-slice2-rotation="-25" data-slice1-scale="2" data-slice2-scale="2">
+                <div class="sl-slide-inner">
+                    <div class="bg-img bg-img-1"></div>
+                    <h2><a href="#">2 Bed Rooms and 1 Dinning Room Aparment on Sale</a></h2>
+                    <blockquote>
+                        <p class="location"><span class="glyphicon glyphicon-map-marker"></span> 1890 Syndey, Australia</p>
+                        <p>Until he extends the circle of his compassion to all living things, man will not himself find peace.</p>
+                        <cite>$ 20,000,000</cite>
+                    </blockquote>
+                </div>
+            </div>
+
+            <div class="sl-slide" data-orientation="vertical" data-slice1-rotation="10" data-slice2-rotation="-15" data-slice1-scale="1.5" data-slice2-scale="1.5">
+                <div class="sl-slide-inner">
+                    <div class="bg-img bg-img-2"></div>
+                    <h2><a href="#">2 Bed Rooms and 1 Dinning Room Aparment on Sale</a></h2>
+                    <blockquote>
+                        <p class="location"><span class="glyphicon glyphicon-map-marker"></span> 1890 Syndey, Australia</p>
+                        <p>Until he extends the circle of his compassion to all living things, man will not himself find peace.</p>
+                        <cite>$ 20,000,000</cite>
+                    </blockquote>
+                </div>
+            </div>
+
+            <div class="sl-slide" data-orientation="horizontal" data-slice1-rotation="3" data-slice2-rotation="3" data-slice1-scale="2" data-slice2-scale="1">
+                <div class="sl-slide-inner">
+                    <div class="bg-img bg-img-3"></div>
+                    <h2><a href="#">2 Bed Rooms and 1 Dinning Room Aparment on Sale</a></h2>
+                    <blockquote>
+                        <p class="location"><span class="glyphicon glyphicon-map-marker"></span> 1890 Syndey, Australia</p>
+                        <p>Until he extends the circle of his compassion to all living things, man will not himself find peace.</p>
+                        <cite>$ 20,000,000</cite>
+                    </blockquote>
+                </div>
+            </div>
+
+            <div class="sl-slide" data-orientation="vertical" data-slice1-rotation="-5" data-slice2-rotation="25" data-slice1-scale="2" data-slice2-scale="1">
+                <div class="sl-slide-inner">
+                    <div class="bg-img bg-img-4"></div>
+                    <h2><a href="#">2 Bed Rooms and 1 Dinning Room Aparment on Sale</a></h2>
+                    <blockquote>
+                        <p class="location"><span class="glyphicon glyphicon-map-marker"></span> 1890 Syndey, Australia</p>
+                        <p>Until he extends the circle of his compassion to all living things, man will not himself find peace.</p>
+                        <cite>$ 20,000,000</cite>
+                    </blockquote>
+                </div>
+            </div>
+
+            <div class="sl-slide" data-orientation="horizontal" data-slice1-rotation="-5" data-slice2-rotation="10" data-slice1-scale="2" data-slice2-scale="1">
+                <div class="sl-slide-inner">
+                    <div class="bg-img bg-img-5"></div>
+                    <h2><a href="#">2 Bed Rooms and 1 Dinning Room Aparment on Sale</a></h2>
+                    <blockquote>
+                        <p class="location"><span class="glyphicon glyphicon-map-marker"></span> 1890 Syndey, Australia</p>
+                        <p>Until he extends the circle of his compassion to all living things, man will not himself find peace.</p>
+                        <cite>$ 20,000,000</cite>
+                    </blockquote>
+                </div>
+            </div>
+        </div><!-- /sl-slider -->
+
+
+
+        <nav id="nav-dots" class="nav-dots">
+            <span class="nav-dot-current"></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+        </nav>
+
+    </div><!-- /slider-wrapper -->*@
+</div>
+
+
+
+<div class="banner-search">
+    <div class="container">
+        <!-- banner -->
+        <h3>Buy, Sale & Rent</h3>
+        <div class="searchbar">
+            <div class="row">
+                <div class="col-lg-6 col-sm-6">
+                    <input type="text" class="form-control" placeholder="Search of Properties">
+                    <div class="row">
+                        <div class="col-lg-3 col-sm-3 ">
+                            <select class="form-control">
+                                <option>Buy</option>
+                                <option>Rent</option>
+                                <option>Sale</option>
+                            </select>
+                        </div>
+                        <div class="col-lg-3 col-sm-4">
+                            <select class="form-control">
+                                <option>Price</option>
+                                <option>$150,000 - $200,000</option>
+                                <option>$200,000 - $250,000</option>
+                                <option>$250,000 - $300,000</option>
+                                <option>$300,000 - above</option>
+                            </select>
+                        </div>
+                        <div class="col-lg-3 col-sm-4">
+                            <select class="form-control">
+                                <option>Property</option>
+                                <option>Apartment</option>
+                                <option>Building</option>
+                                <option>Office Space</option>
+                            </select>
+                        </div>
+                        <div class="col-lg-3 col-sm-4">
+                            <button class="btn btn-success" onclick="window.location.href='buysalerent.php'">Find Now</button>
+                        </div>
+                    </div>
+
+
+                </div>
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <div class="col-lg-5 col-lg-offset-1 col-sm-6 ">
+                        <p asp-area="">@Context.Session.GetString("FullName")</p>
+                        <div class="myPanel">
+                            <a class="btn btn-info" asp-area="User" asp-controller="User" asp-action="LogOut">Logout</a>
+                        </div>
+
+                    </div>
+                }
+                else
+                {
+                    <div class="col-lg-5 col-lg-offset-1 col-sm-6 ">
+                        <p>Join now and get updated with all the properties deals.</p>
+                        <a class="btn btn-info" asp-area="User" asp-controller="User" asp-action="Login">Login</a>
+                    </div>
+
+                }
+
+            </div>
+        </div>
+    </div>
+</div>
+<!-- banner -->
+<div class="container">
+    <div class="properties-listing spacer">
+        <a asp-controller="Advert" asp-action="AdvertAll" class="pull-right viewall">View All Listing</a>
+        <h2>Featured Properties</h2>
+        <br />
+        @await Component.InvokeAsync("AdvertAll")
+
+    </div>
+
+
+
+</div>
+
+<div class="container">
+    <div class="properties-listing spacer">
+        <a asp-controller="Project" asp-action="ProjectAll" class="pull-right viewall">View All Listing</a>
+        <h2>Project Showcase</h2>
+        <br />
+        @await Component.InvokeAsync("Projects")
+        @*<div id="owl-example1" class="owl-carousel1">
+            <div class="properties">
+                <div class="image-holder">
+                    <img src="~/RealEState/images/properties/1.jpg" class="img-responsive" alt="properties" />
+                    <div class="status sold">Sold</div>
+                </div>
+                <h4><a href="property-detail.php">Royal Inn</a></h4>
+                <p class="price">Price: $234,900</p>
+                <div class="listing-detail"><span data-toggle="tooltip" data-placement="bottom" data-original-title="Bed Room">5</span> <span data-toggle="tooltip" data-placement="bottom" data-original-title="Living Room">2</span> <span data-toggle="tooltip" data-placement="bottom" data-original-title="Parking">2</span> <span data-toggle="tooltip" data-placement="bottom" data-original-title="Kitchen">1</span> </div>
+                <a class="btn-price" href="property-detail.php">View Details</a>
+            </div>
+            <div class="properties">
+                <div class="image-holder">
+                    <img src="~/RealEState/images/properties/2.jpg" class="img-responsive" alt="properties" />
+                    <div class="status new">New</div>
+                </div>
+                <h4><a href="property-detail.php">Royal Inn</a></h4>
+                <p class="price">Price: $234,900</p>
+                <div class="listing-detail"><span data-toggle="tooltip" data-placement="bottom" data-original-title="Bed Room">5</span> <span data-toggle="tooltip" data-placement="bottom" data-original-title="Living Room">2</span> <span data-toggle="tooltip" data-placement="bottom" data-original-title="Parking">2</span> <span data-toggle="tooltip" data-placement="bottom" data-original-title="Kitchen">1</span> </div>
+                <a class="btn-price" href="property-detail.php">View Details</a>
+            
+            </div>
+            <div class="properties">
+                <div class="image-holder">
+                    <img src="~/RealEState/images/properties/3.jpg" class="img-responsive" alt="properties" />
+                    <div class="status new">New</div>
+                    </div>
+                <h4><a href="property-detail.php">Royal Inn</a></h4>
+                <div  data-v-115a44dc="" data-v-3f9c9f47="" class="he-realty-card-info he-vertical-realty-card__info he-realty-card-info--vertical">
+                    <ul  data-v-cfe36724="" data-v-3f9c9f47="" class="he-realty-card-attributes" data-v-115a44dc="">
+                        <li data-v-cfe36724="" class="he-realty-card-attributes__attribute">
+                            <!---->
+                            70 - 211 m²|
+                        </li>
+                        <li data-v-cfe36724="" class="he-realty-card-attributes__attribute">
+                            <!---->
+                            1 + 1
+                        </li>
+                        <li data-v-cfe36724="" class="he-realty-card-attributes__attribute">
+                            <!---->
+                            2 + 1
+                        </li>
+                    
+                    </ul> <div data-v-115a44dc="" class="he-realty-card-info__title"><span data-v-d99bff2c="" data-v-5248465b="" class="project-listing-realty-card-title project-listing-realty-card__title" data-v-115a44dc=""><!----></span></div> <div  data-v-115a44dc="" class="he-realty-card-info__location">
+                        İstanbul, Avcılar, Tahtakale
+                    </div> <div style="margin-bottom:20px;"data-v-115a44dc="" class="he-realty-card-info__listing-date">
+                        2024 - 4. Çeyrek
+                    </div>
+            </div>
+                <a class="btn-price" href="property-detail.php">View Details</a>
+            </div>
+            <div class="properties">
+                <div class="image-holder"><img src="~/RealEState/images/properties/4.jpg" class="img-responsive" alt="properties" /></div>
+                <h4><a href="property-detail.php">Royal Inn</a></h4>
+                <p class="price">Price: $234,900</p>
+                <div class="listing-detail"><span data-toggle="tooltip" data-placement="bottom" data-original-title="Bed Room">5</span> <span data-toggle="tooltip" data-placement="bottom" data-original-title="Living Room">2</span> <span data-toggle="tooltip" data-placement="bottom" data-original-title="Parking">2</span> <span data-toggle="tooltip" data-placement="bottom" data-original-title="Kitchen">1</span> </div>
+                <a class="btn-price" href="property-detail.php">View Details</a>
+            </div>
+            <div class="properties">
+                <div class="image-holder">
+                    <img src="~/RealEState/images/properties/1.jpg" class="img-responsive" alt="properties" />
+                    <div class="status sold">Sold</div>
+                </div>
+                <h4><a href="property-detail.php">Royal Inn</a></h4>
+                <p class="price">Price: $234,900</p>
+                <div class="listing-detail"><span data-toggle="tooltip" data-placement="bottom" data-original-title="Bed Room">5</span> <span data-toggle="tooltip" data-placement="bottom" data-original-title="Living Room">2</span> <span data-toggle="tooltip" data-placement="bottom" data-original-title="Parking">2</span> <span data-toggle="tooltip" data-placement="bottom" data-original-title="Kitchen">1</span> </div>
+                <a class="btn-price" href="property-detail.php">View Details</a>
+            </div>
+            <div class="properties">
+                <div class="image-holder">
+                    <img src="~/RealEState/images/properties/2.jpg" class="img-responsive" alt="properties" />
+                    <div class="status sold">Sold</div>
+                </div>
+                <h4><a href="property-detail.php">Royal Inn</a></h4>
+                <p class="price">Price: $234,900</p>
+                <div class="listing-detail"><span data-toggle="tooltip" data-placement="bottom" data-original-title="Bed Room">5</span> <span data-toggle="tooltip" data-placement="bottom" data-original-title="Living Room">2</span> <span data-toggle="tooltip" data-placement="bottom" data-original-title="Parking">2</span> <span data-toggle="tooltip" data-placement="bottom" data-original-title="Kitchen">1</span> </div>
+                <a class="btn-price" href="property-detail.php">View Details</a>
+            </div>
+            <div class="properties">
+                <div class="image-holder">
+                    <img src="~/RealEState/images/properties/3.jpg" class="img-responsive" alt="properties" />
+                    <div class="status new">New</div>
+                </div>
+                <h4><a href="property-detail.php">Royal Inn</a></h4>
+                <p class="price">Price: $234,900</p>
+                <div class="listing-detail"><span data-toggle="tooltip" data-placement="bottom" data-original-title="Bed Room">5</span> <span data-toggle="tooltip" data-placement="bottom" data-original-title="Living Room">2</span> <span data-toggle="tooltip" data-placement="bottom" data-original-title="Parking">2</span> <span data-toggle="tooltip" data-placement="bottom" data-original-title="Kitchen">1</span> </div>
+                <a class="btn-price" href="property-detail.php">View Details</a>
+            </div>
+            <div class="properties">
+                <div class="image-holder"><img src="~/RealEState/images/properties/4.jpg" class="img-responsive" alt="properties" /></div>
+                <h4><a href="property-detail.php">Royal Inn</a></h4>
+                <p class="price">Price: $234,900</p>
+                <div class="listing-detail"><span data-toggle="tooltip" data-placement="bottom" data-original-title="Bed Room">5</span> <span data-toggle="tooltip" data-placement="bottom" data-original-title="Living Room">2</span> <span data-toggle="tooltip" data-placement="bottom" data-original-title="Parking">2</span> <span data-toggle="tooltip" data-placement="bottom" data-original-title="Kitchen">1</span> </div>
+                <a class="btn-price" href="property-detail.php">View Details</a>
+            </div>
+            <div class="properties">
+                <div class="image-holder"><img src="~/RealEState/images/properties/1.jpg" class="img-responsive" alt="properties" /></div>
+                <h4><a href="property-detail.php">Royal Inn</a></h4>
+                <p class="price">Price: $234,900</p>
+                <div class="listing-detail"><span data-toggle="tooltip" data-placement="bottom" data-original-title="Bed Room">5</span> <span data-toggle="tooltip" data-placement="bottom" data-original-title="Living Room">2</span> <span data-toggle="tooltip" data-placement="bottom" data-original-title="Parking">2</span> <span data-toggle="tooltip" data-placement="bottom" data-original-title="Kitchen">1</span> </div>
+                <a class="btn-price" href="property-detail.php">View Details</a>
+            </div>
+            <div class="properties">
+                <div class="image-holder"><img src="~/RealEState/images/properties/2.jpg" class="img-responsive" alt="properties" /></div>
+                <h4><a href="property-detail.php">Royal Inn</a></h4>
+                <p class="price">Price: $234,900</p>
+                <div class="listing-detail"><span data-toggle="tooltip" data-placement="bottom" data-original-title="Bed Room">5</span> <span data-toggle="tooltip" data-placement="bottom" data-original-title="Living Room">2</span> <span data-toggle="tooltip" data-placement="bottom" data-original-title="Parking">2</span> <span data-toggle="tooltip" data-placement="bottom" data-original-title="Kitchen">1</span> </div>
+                <a class=" btn-price" href="property-detail.php">View Details</a>
+            </div>
+            <div class="properties">
+                <div class="image-holder"><img src="~/RealEState/images/properties/3.jpg" class="img-responsive" alt="properties" /></div>
+                <h4><a href="property-detail.php">Royal Inn</a></h4>
+                <p class="price">Price: $234,900</p>
+                <div class="listing-detail"><span data-toggle="tooltip" data-placement="bottom" data-original-title="Bed Room">5</span> <span data-toggle="tooltip" data-placement="bottom" data-original-title="Living Room">2</span> <span data-toggle="tooltip" data-placement="bottom" data-original-title="Parking">2</span> <span data-toggle="tooltip" data-placement="bottom" data-original-title="Kitchen">1</span> </div>
+                <a class="btn-price" href="property-detail.php">View Details</a>
+            </div>
+
+        </div>*@
+    </div>
+
+    <div class="spacer">
+        <div class="row">
+            <div class="col-lg-6 col-sm-9 recent-view">
+                <h3>About Us</h3>
+                <p>The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.<br><a href="about.php">Learn More</a></p>
+
+            </div>
+            <div class="col-lg-5 col-lg-offset-1 col-sm-3 recommended">
+                <h3>Recommended Properties</h3>
+                <div id="myCarousel" class="carousel slide">
+                    <ol class="carousel-indicators">
+                        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                        <li data-target="#myCarousel" data-slide-to="1" class=""></li>
+                        <li data-target="#myCarousel" data-slide-to="2" class=""></li>
+                        <li data-target="#myCarousel" data-slide-to="3" class=""></li>
+                    </ol>
+                    <!-- Carousel items -->
+                    <div class="carousel-inner">
+                        <div class="item active">
+                            <div class="row">
+                                <div class="col-lg-4"><img src="~/RealEState/images/properties/1.jpg" class="img-responsive" alt="properties" /></div>
+                                <div class="col-lg-8">
+                                    <h5><a href="property-detail.php">Integer sed porta quam</a></h5>
+                                    <p class="price">$300,000</p>
+                                    <a href="property-detail.php" class="more">More Detail</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="row">
+                                <div class="col-lg-4"><img src="~/RealEState/images/properties/2.jpg" class="img-responsive" alt="properties" /></div>
+                                <div class="col-lg-8">
+                                    <h5><a href="property-detail.php">Integer sed porta quam</a></h5>
+                                    <p class="price">$300,000</p>
+                                    <a href="property-detail.php" class="more">More Detail</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="row">
+                                <div class="col-lg-4"><img src="~/RealEState/images/properties/3.jpg" class="img-responsive" alt="properties" /></div>
+                                <div class="col-lg-8">
+                                    <h5><a href="property-detail.php">Integer sed porta quam</a></h5>
+                                    <p class="price">$300,000</p>
+                                    <a href="property-detail.php" class="more">More Detail</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="row">
+                                <div class="col-lg-4"><img src="~/RealEState/images/properties/4.jpg" class="img-responsive" alt="properties" /></div>
+                                <div class="col-lg-8">
+                                    <h5><a href="property-detail.php">Integer sed porta quam</a></h5>
+                                    <p class="price">$300,000</p>
+                                    <a href="property-detail.php" class="more">More Detail</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div class="container">
+    <div class="spacer">
+        <div class="row">
+
+            <section class="he-homepage-container" data-v-235e6d73>
+                <div class="he-homepage-container__item" data-v-235e6d73>
+                    <div class="main-category-widget" data-v-235e6d73>
+                        <div class="main-category-widget__head" data-v-235e6d73>
+                            <h2 data-v-235e6d73>
+                                Binlerce İlan Arasında
+                                <strong>Aradığın Evi Bul</strong>
+                            </h2>
+                        </div>
+                    </div>
+                    <div class="main-category-widget__item-list" data-v-235e6d73>
+                        <div class="main-category-widget__item" data-v-235e6d73>
+                            <a asp-controller="Advert" asp-action="SaleBuilding" title="Satılık Ev">
+                                <div class="main-category-widget__item-head">
+                                    <h3 class="main-category-text">Satılık</h3> <span class="main-category-icon icon-/satilik">
+                                    </span>
+                                </div>
+                            </a> <ul class="main-category-widget__link-list" data-v-235e6d73>
+                                <li class="main-category-widget__link-list-item" data-v-235e6d73>
+                                    <a asp-controller="Advert" asp-action="SaleApartment" title="Satılık Daire" class="main-category-widget__link-list-item-link">
+                                        <span>Satılık Daire</span>
+                                        <span>193.029</span>
+                                    </a>
+                                </li>
+                                <li class="main-category-widget__link-list-item" data-v-235e6d73><a asp-controller="Advert" asp-action="SaleVilla" title="Satılık Villa" class="main-category-widget__link-list-item-link"><span>Satılık Villa</span> <span>24.347</span></a></li>
+                                <li class="main-category-widget__link-list-item" data-v-235e6d73><a asp-controller="Advert" asp-action="SalePrivateBuilding" title="Satılık Müstakil Ev" class="main-category-widget__link-list-item-link"><span>Satılık Müstakil Ev</span> <span>9.790</span></a></li>
+                                <li class="main-category-widget__link-list-item" data-v-235e6d73><a asp-controller="Advert" asp-action="SaleBuilding" title="Satılık Bina" class="main-category-widget__link-list-item-link"><span>Satılık Bina</span> <span>2.371</span></a></li>
+                            </ul>
+                        </div>
+                        <div class="main-category-widget__item" data-v-235e6d73>
+                            <a asp-controller="Advert" asp-action="RentBuilding" title="Kiralık Ev">
+                                <div class="main-category-widget__item-head">
+                                    <h3 class="main-category-text">Kiralık</h3>
+                                    <span class="main-category-icon icon-/kiralik"></span>
+                                </div>
+                            </a>
+                            <ul class="main-category-widget__link-list" data-v-235e6d73>
+                                <li class="main-category-widget__link-list-item" data-v-235e6d73><a asp-controller="Advert" asp-action="RentApartment" title="Kiralık Daire" class="main-category-widget__link-list-item-link"><span>Kiralık Daire</span> <span>27.017</span></a></li>
+                                <li class="main-category-widget__link-list-item" data-v-235e6d73><a asp-controller="Advert" asp-action="RentVilla" title="Kiralık Villa" class="main-category-widget__link-list-item-link"><span>Kiralık Villa</span> <span>2.839</span></a></li>
+                                <li class="main-category-widget__link-list-item" data-v-235e6d73>
+                                    <a asp-controller="Advert" asp-action="RentPrivateBuilding" title="Kiralık Müstakil Ev" class="main-category-widget__link-list-item-link">
+                                        <span>Kiralık Müstakil Ev</span>
+                                        <span>713</span>
+                                    </a>
+                                </li>
+                                <li class="main-category-widget__link-list-item" data-v-235e6d73><a asp-controller="Advert" asp-action="RentBuilding" title="Kiralık Bina" class="main-category-widget__link-list-item-link"><span>Kiralık Bina</span> <span>109</span></a></li>
+                            </ul>
+                        </div>
+                        <div class="main-category-widget__item" data-v-235e6d73>
+                            <a asp-controller="Advert" asp-action="DailyRentBuilding" title="Günlük Kiralık Ev">
+                                <div class="main-category-widget__item-head">
+                                    <h3 class="main-category-text">Günlük Kiralık</h3>
+                                    <span class="main-category-icon icon-/gunluk-kiralik"></span>
+                                </div>
+                            </a>
+                            <ul class="main-category-widget__link-list" data-v-235e6d73>
+                                <li class="main-category-widget__link-list-item" data-v-235e6d73>
+                                    <a asp-controller="Advert" asp-action="DailyRentApartment" title="Günlük Kiralık Daire" class="main-category-widget__link-list-item-link">
+                                        <span>Günlük Kiralık Daire</span> <span>1.442</span>
+                                    </a>
+                                </li>
+                                <li class="main-category-widget__link-list-item" data-v-235e6d73>
+                                    <a href="/gunluk-kiralik/villa" title="Günlük Kiralık Villa" class="main-category-widget__link-list-item-link">
+                                        <span>Günlük Kiralık Villa</span>
+                                        <span>389</span>
+                                    </a>
+                                </li>
+                                <li class="main-category-widget__link-list-item" data-v-235e6d73>
+                                    <a href="/gunluk-kiralik/mustakil-ev" title="Günlük Kiralık Müstakil Ev" class="main-category-widget__link-list-item-link">
+                                        <span>Günlük Kiralık Müstakil Ev</span> <span>24</span>
+                                    </a>
+                                </li>
+                                <li class="main-category-widget__link-list-item" data-v-235e6d73>
+                                    <a href="/gunluk-kiralik/bina" title="Günlük Kiralık Bina" class="main-category-widget__link-list-item-link">
+                                        <span>Günlük Kiralık Bina</span> <span>8</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div><div class="main-category-widget__item" data-v-235e6d73>
+                            <a href="/sahibinden" title="Sahibinden Ev">
+                                <div class="main-category-widget__item-head">
+                                    <h3 class="main-category-text">Sahibinden</h3> <span class="main-category-icon icon-/sahibinden">
+                                    </span>
+                                </div>
+                            </a> <ul class="main-category-widget__link-list" data-v-235e6d73>
+                                <li class="main-category-widget__link-list-item" data-v-235e6d73>
+                                    <a href="/satilik-sahibinden/daire" title="Sahibinden Satılık Daire" class="main-category-widget__link-list-item-link"><span>Sahibinden Satılık Daire</span> <span>9.078</span></a>
+                                </li>
+                                <li class="main-category-widget__link-list-item" data-v-235e6d73><a href="/kiralik-sahibinden/daire" title="Sahibinden Kiralık Daire" class="main-category-widget__link-list-item-link"><span>Sahibinden Kiralık Daire</span> <span>1.607</span></a></li>
+                                <li class="main-category-widget__link-list-item" data-v-235e6d73><a href="/kiralik-sahibinden/dukkan-magaza" title="Sahibinden Kiralık Dükkan &amp; Mağaza" class="main-category-widget__link-list-item-link"><span>Sahibinden Kiralık Dükkan &amp; Mağaza</span> <span>561</span></a></li>
+                                <li class="main-category-widget__link-list-item" data-v-235e6d73><a href="/satilik-sahibinden/mustakil-ev" title="Sahibinden Satılık Müstakil Ev" class="main-category-widget__link-list-item-link"><span>Sahibinden Satılık Müstakil Ev</span> <span>948</span></a></li>
+                            </ul>
+                        </div><div class="main-category-widget__item" data-v-235e6d73><a href="/projeler" title="Projeler"><div class="main-category-widget__item-head"><h3 class="main-category-text">Projeler</h3> <span class="main-category-icon icon-/projeler"></span></div></a> <ul class="main-category-widget__link-list" data-v-235e6d73><li class="main-category-widget__link-list-item" data-v-235e6d73><a href="/proje/istanbul-projeleri" title="İstanbul Konut Projeleri" class="main-category-widget__link-list-item-link"><span>İstanbul</span> <span>886</span></a></li><li class="main-category-widget__link-list-item" data-v-235e6d73><a href="/proje/izmir-projeleri" title="İzmir Konut Projeleri" class="main-category-widget__link-list-item-link"><span>İzmir</span> <span>180</span></a></li><li class="main-category-widget__link-list-item" data-v-235e6d73><a href="/proje/ankara-projeleri" title="Ankara Konut Projeleri" class="main-category-widget__link-list-item-link"><span>Ankara</span> <span>176</span></a></li><li class="main-category-widget__link-list-item" data-v-235e6d73><a href="/proje/bursa-projeleri" title="Bursa Konut Projeleri" class="main-category-widget__link-list-item-link"><span>Bursa</span> <span>135</span></a></li></ul></div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+</div>
+

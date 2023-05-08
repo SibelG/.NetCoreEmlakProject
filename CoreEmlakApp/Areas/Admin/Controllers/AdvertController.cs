@@ -12,19 +12,23 @@ namespace CoreEmlakApp.Areas.Admin.Controllers
     [Authorize(Roles ="Admin")]
     public class AdvertController : Controller
     {
-        AdvertService advertService;
-        CityService cityService;
-        DistrictService districtService;
-        NeighbourhoodService neighbourhoodService;
-        SituationService situationService;
-        TypeService typeService;
-        ImagesService imagesService;
+        private readonly AdvertService advertService;
+        private readonly CityService cityService;
+        private readonly DistrictService districtService;
+        private readonly NeighbourhoodService neighbourhoodService;
+        private readonly SituationService situationService;
+        private readonly TypeService typeService;
+        private readonly ImagesService imagesService;
+        private readonly FrontService frontService;
+        private readonly FuelTypeService fuelTypeService;
 
-        IWebHostEnvironment webHostEnvironment;
+        private readonly IWebHostEnvironment webHostEnvironment;
       
 
       
-        public AdvertController(AdvertService advertService,CityService cityService,DistrictService districtService,NeighbourhoodService neighbourhoodService,SituationService situationService,TypeService typeService,IWebHostEnvironment webHostEnvironment,ImagesService imagesService)
+        public AdvertController(AdvertService advertService,CityService cityService,DistrictService districtService,
+            NeighbourhoodService neighbourhoodService,SituationService situationService,TypeService typeService,
+            IWebHostEnvironment webHostEnvironment,ImagesService imagesService,FuelTypeService fuelTypeService,FrontService frontService)
         {
             this.advertService = advertService;
             this.cityService = cityService;
@@ -33,7 +37,10 @@ namespace CoreEmlakApp.Areas.Admin.Controllers
             this.situationService = situationService;
             this.typeService = typeService; 
             this.imagesService = imagesService;
+            this.fuelTypeService = fuelTypeService;
+            this.frontService = frontService;
             this.webHostEnvironment = webHostEnvironment;
+            
         }
 
         
@@ -74,11 +81,11 @@ namespace CoreEmlakApp.Areas.Admin.Controllers
                         item.CopyTo(dosyaAkısı);
                     }
 
-                   imagesService.TAdd(new Images { ImageName = item.FileName, Status = true ,AdvertId = advert.AdvertId});
+                   imagesService.TAdd(new Images { ImageName = item.FileName, Status = true ,AdvertId = data.AdvertId});
                 }
 
                
-                TempData["Success"] = "Advert Success";
+                TempData["Success"] = "Advert Image Success";
                 return RedirectToAction("Index");
             }
             return View(advert);
@@ -216,7 +223,7 @@ namespace CoreEmlakApp.Areas.Admin.Controllers
         }
         public IActionResult Update(int id)
         {
-            ViewBag.userId = HttpContext.Session.GetString("userId");
+            ViewBag.userId = HttpContext.Session.GetString("Id");
             Dropdown();
             var advert = advertService.TGetById(id);
             return View(advert);
@@ -307,9 +314,9 @@ namespace CoreEmlakApp.Areas.Admin.Controllers
             ViewBag.district = new SelectList(districtList, "DistrictId", "DistictName");
             return PartialView("DistrictPartial");
         }
-        public IActionResult TypeGet(int SituationId)
+        public IActionResult TypeGet(int CategoryId)
         {
-            List<EntityLayer.Entities.Type> typeList = typeService.List(x => x.Status == true && x.SituationId == SituationId);
+            List<EntityLayer.Entities.Type> typeList = typeService.List(x => x.Status == true && x.CategoryId== CategoryId);
             ViewBag.type = new SelectList(typeList, "TypeId", "TypeName");
             return PartialView("TypePartial");
         }
@@ -321,9 +328,28 @@ namespace CoreEmlakApp.Areas.Admin.Controllers
         }
         public void Dropdown()
         {
-            ViewBag.cityList = new SelectList(CityGet(), "CityId", "CityName");
-            ViewBag.situations = new SelectList(SituationGet(), "SituationId", "SituationName");
+            // ViewBag.cityList = new SelectList(CityGet(), "CityId", "CityName");
+            List<SelectListItem> value = (from x in cityService.List(x => x.Status == true)
+                                           select new SelectListItem
+                                           {
+                                               Text = x.CityName,
+                                               Value = x.CityId.ToString()
 
+
+                                           }).ToList();
+
+            ViewBag.cityList = value;
+           // ViewBag.situations = new SelectList(SituationGet(), "SituationId", "SituationName");
+            List<SelectListItem> situationList = (from x in situationService.List(x => x.Status == true)
+                                           select new SelectListItem
+                                           {
+                                               Text = x.SituationName,
+                                               Value = x.SituationId.ToString()
+
+
+                                           }).ToList();
+
+            ViewBag.situations= situationList;
 
             List<SelectListItem> value1 = (from x in districtService.List(x => x.Status == true)
                                            select new SelectListItem
@@ -367,6 +393,28 @@ namespace CoreEmlakApp.Areas.Admin.Controllers
                                            }).ToList();
 
             ViewBag.situation = value4;
+
+            List<SelectListItem> value5 = (from x in fuelTypeService.List(x => x.Status == true)
+                                           select new SelectListItem
+                                           {
+                                               Text = x.FuelTypeName,
+                                               Value = x.FuelTypeId.ToString()
+
+
+                                           }).ToList();
+
+            ViewBag.FuelTypes = value5;
+
+            List<SelectListItem> value6 = (from x in frontService.List(x => x.Status == true)
+                                           select new SelectListItem
+                                           {
+                                               Text = x.FrontName,
+                                               Value = x.FrontId.ToString()
+
+
+                                           }).ToList();
+
+            ViewBag.Fronts = value6;
 
 
         }

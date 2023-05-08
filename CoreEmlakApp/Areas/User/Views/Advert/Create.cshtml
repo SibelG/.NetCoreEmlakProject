@@ -4,46 +4,46 @@
     Layout = "~/Areas/User/Views/Shared/_UserLayout.cshtml";
 }
 
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js"></script>
+
 <div class="container">
     <div class="row">
-        <div col-md-12>
+        <div class="col-md-12">
             <div class="col-md-6">
                 <div class="form-group">
-                    <div class="form-group">
+                 <div class="form-group">
                         <form method="post" enctype="multipart/form-data" asp-antiforgery="true">
                             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-
-                            <input type="hidden" value="@ViewBag.userId" asp-for="UserAdminId" />
+                           
+                            <input type="hidden" value="@ViewBag.userId"asp-for="UserAdminId"/>
+                         
+                            <label>Advert Title</label>
+                            <input type="text" asp-for="AdvertTitle" class="form-control"/>
+                            <span asp-validation-for="AdvertTitle" class="text text-danger"></span>
+                            <br />
                             <label>Description</label>
                             <textarea cols="4" rows="4" asp-for="Description" class="form-control"></textarea>
                             <span asp-validation-for="Description" class="text text-danger"></span>
                             <br />
-                            <label>Advert Title</label>
-                            <input type="text" asp-for="AdvertTitle" class="form-control" />
-                            <span asp-validation-for="AdvertTitle" class="text text-danger"></span>
-                            <br />
-                            <label>Advert Title</label>
-                            <input type="text" asp-for="AdvertTitle" class="form-control" />
-                            <span asp-validation-for="AdvertTitle" class="text text-danger"></span>
-                            <br />
                             <label>Price</label>
-                            <input type="text" asp-for="Price" class="form-control" />
+                            <input type="text" asp-for="Price" class="form-control"/>
                             <span asp-validation-for="Price" class="text text-danger"></span>
                             <br />
                             <label>Room Count</label>
-                            <input type="text" asp-for="NumberOfRooms" class="form-control" />
+                            <input type="number" asp-for="NumberOfRooms" class="form-control"/>
                             <span asp-validation-for="NumberOfRooms" class="text text-danger"></span>
                             <br />
                             <label>Bath Count</label>
-                            <input type="text" asp-for="BathRoomNumbers" class="form-control" />
+                            <input type="number" asp-for="BathRoomNumbers" class="form-control"/>
                             <span asp-validation-for="BathRoomNumbers" class="text text-danger"></span>
                             <br />
                             <label>Credit Eligibility</label>
-                            <input type="checkbox" asp-for="Credid" />
+                            <input type="checkbox" asp-for="Credid"/>
                             <span asp-validation-for="Credid" class="text text-danger"></span>
                             <br />
                             <label>Garage</label>
-                            <input type="checkbox" asp-for="Garage" />
+                            <input type="checkbox" asp-for="Garage"  />
                             <span asp-validation-for="Garage" class="text text-danger"></span>
                             <br />
                             <label>Fireplace</label>
@@ -54,11 +54,11 @@
                             <input type="checkbox" asp-for="Garden" />
                             <span asp-validation-for="Garden" class="text text-danger"></span>
                             <br />
-                            <label>Furniture?</label>
+                             <label>Furniture?</label>
                             <input type="checkbox" asp-for="Furniture" />
                             <span asp-validation-for="Furniture" class="text text-danger"></span>
                             <br />
-                            <label>Pool</label>
+                             <label>Pool</label>
                             <input type="checkbox" asp-for="Pool" />
                             <span asp-validation-for="Pool" class="text text-danger"></span>
                             <br />
@@ -70,27 +70,51 @@
                             <input type="checkbox" asp-for="AirCoordinator" />
                             <span asp-validation-for="AirCoordinator" class="text text-danger"></span>
                             <br />
+                            <label>Building Use Case</label>
+                            <input type="checkbox" asp-for="UseCase" />
+                            <span asp-validation-for="UseCase" class="text text-danger"></span>
+                            <br />
+                            <label>Authorized Office</label>
+                            <input type="checkbox" asp-for="AuthorizedOffice" />
+                            <span asp-validation-for="AuthorizedOffice" class="text text-danger"></span>
+                            <br />
+                            <label>Video Browsing</label>
+                            <input type="checkbox" asp-for="VideoBrowsing" />
+                            <span asp-validation-for="VideoBrowsing" class="text text-danger"></span>
+                            <br />
                             <label>Area</label>
                             <input type="text" asp-for="Area" class="form-control" />
                             <span asp-validation-for="Area" class="text text-danger"></span>
                             <br />
-                            <label>Floor Count</label>
+                            <label>Floor</label>
                             <input type="text" asp-for="Floor" class="form-control" />
                             <span asp-validation-for="Floor" class="text text-danger"></span>
+                            <br />
+                            <label>Building Age</label>
+                            <input type="text" asp-for="BuildingAge" class="form-control" />
+                            <span asp-validation-for="BuildingAge" class="text text-danger"></span>
                             <br />
                             <label>Phone Number</label>
                             <input type="text" asp-for="PhoneNumber" class="form-control" />
                             <span asp-validation-for="PhoneNumber" class="text text-danger"></span>
                             <br />
+                            <label>Subscription</label>
+                            <input type="text" asp-for="PhoneNumber" class="form-control" />
+                            <span asp-validation-for="PhoneNumber" class="text text-danger"></span>
+                            <br />
+                             <label>Deposit</label>
+                            <input type="text" asp-for="PhoneNumber" class="form-control" />
+                            <span asp-validation-for="PhoneNumber" class="text text-danger"></span>
+                            <br />
                             <label>Address</label>
-                            <textarea rows="4" cols="4" asp-for="Address" class="form-control" />
+                            <textarea cols="4" rows="4" asp-for="Address" class="form-control"></textarea>
                             <span asp-validation-for="Address" class="text text-danger"></span>
                             <br />
-
+                        
                             <label>City</label>
-                            <select asp-for="CityId" id="CityId" class="form-control">
+                            <select  id="CityId" asp-for="CityId"class="form-control">
                                 <option value="0" selected>Select</option>
-                                @foreach (var item in ViewBag.cityList)
+                                @foreach(var item in ViewBag.cityList)
                                 {
                                     <option value="@item.Value">@item.Text</option>
                                 }
@@ -100,8 +124,8 @@
                             <label>District</label>
                             <select asp-for="DistrictId" id="DistrictId" class="form-control">
                                 <option value="0" selected>Select</option>
-
-                                @foreach (var item in ViewBag.district)
+                               
+                                  @foreach(var item in ViewBag.district)
                                 {
                                     <option value="@item.Value">@item.Text</option>
                                 }
@@ -110,16 +134,17 @@
                             <br />
 
                             <label>Neighbourhood</label>
-                            <select asp-for="NeighboorHoodId" id="NeighbourhoodId" class="form-control">
+                            <select asp-for="NeighbourhoodId" id="NeighbourhoodId" class="form-control">
                                 <option value="0" selected>Select</option>
 
                                 @foreach (var item in ViewBag.neighbourhood)
                                 {
                                     <option value="@item.Value">@item.Text</option>
                                 }
-
+                                
 
                             </select>
+
                             <br />
                             <label>Situation</label>
                             <select asp-for="SituationId" id="SituationId" class="form-control">
@@ -132,11 +157,47 @@
                             </select>
                             <br />
 
-                            <label>Type</label>
-                            <select asp-for="TypeId" id="TypeId" class="form-control">
+                            <label>Category</label>
+                            <select asp-for="CategoryId" id="CategoryId" class="form-control">
                                 <option value="0" selected>Select</option>
 
-                                @foreach (var item in ViewBag.type)
+                                @foreach (var item in ViewBag.category)
+                                {
+                                    <option value="@item.Value">@item.Text</option>
+                                }
+
+
+                            </select>
+                            <br />
+                            <label>Type</label>
+                            <select asp-for="TypeId" id="TypeId" class="form-control">
+                                <option value="-1" selected>Select</option>
+
+                               @* @foreach (var item in ViewBag.type)
+                                {
+                                    <option value="@item.Value">@item.Text</option>
+                                }*@
+                                
+
+                            </select>
+                            <br />
+                             <label>Fuel Type</label>
+                            <select asp-for="FuelTypeId" id="FuelTypeId" class="form-control">
+                                <option value="0" selected>Select</option>
+
+                                @foreach (var item in ViewBag.FuelTypes)
+                                {
+                                    <option value="@item.Value">@item.Text</option>
+                                }
+                                
+
+                            </select>
+                            <br />
+                            <label>Fronts</label>
+                            <select asp-for="FrontId" id="FrontId" class="form-control">
+                                <option value="0" selected>Select</option>
+
+                                @foreach (var item in ViewBag.Fronts)
                                 {
                                     <option value="@item.Value">@item.Text</option>
                                 }
@@ -151,24 +212,25 @@
 
                             <button type="submit" class="btn btn-primary">Add</button>
 
-                        </form>
+                            </form>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-<script src="~/adminweb/plugins/jquery/jquery.min.js"></script>
+
 <script type="text/javascript">
-    $(document).ready(function(){
-        $('#CityId').change(function(){
-            var cityId=$(this).val();
+    $(document).ready(function () {
+        $('#CityId').change(function () {
+            var cityId = $(this).val();
             debugger
+
             $.ajax({
                 type="Post",
-                url="/User/Advert/DistrictGet?/CityId="+cityId,
+                url="/User/Advert/DistrictGet?CityId=" + cityId,
                 contentType="html",
-                success:function(response){
+                success: function (response) {
                     debugger
                     $("#DistrictId").empty();
                     $("#DistrictId").append(response);
@@ -177,39 +239,40 @@
 
             })
         })
-
-    });
-</script>
-<script type="text/javascript">
-    $(document).ready(function () {
-        $('#SituationId').change(function () {
-            var situationId = $(this).val();
+        $('#CategoryId').change(function () {
+            $('#TypeId').empty();
+            var categoryId = $(this).val();
             debugger
+
             $.ajax({
-                type="Post",
-                url="/User/Advert/TypeGet?/SituationId=" + situationId,
-                contentType="html",
+                type="GET",
+                url="/User/Advert/TypeGet?CategoryId=" + 1,
+                //url= '@Url.Action("TypeGet")',
+                dataType: 'json',
+               // data: { CategoryId: categoryId },
+
                 success: function (response) {
                     debugger
-                    $("#TypeId").empty();
-                    $("#TypeId").append(response);
+                    $("#TypeId").append('<option value="' + -1 + '">' +
+                        "Select" + '</option>');
+
+                    $.each(response, function (type) {
+                        $("#TypeId").append('<option value="' + type.value + '">' +
+                            type.text + '</option>');
+                    });
+
 
                 }
 
+
             });
-        })
-
-    });
-</script>
-
-<script type="text/javascript">
-    $(document).ready(function () {
+        });
         $('#DistrictId').change(function () {
             var districtId = $(this).val();
             debugger
             $.ajax({
                 type="Post",
-                url="/User/Advert/NeighbourhoodGet?/DistrictId=" + districtId,
+                url="/User/Advert/NeighbourhoodGet?DistrictId=" + districtId,
                 contentType="html",
                 success: function (response) {
                     debugger
@@ -220,6 +283,60 @@
 
             })
         })
-
     });
 </script>
+@*    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#CategoryId').change(function () {
+                $('#TypeId').empty();
+                var categoryId = $("CategoryId option:selected").val();
+                debugger
+
+                $.ajax({
+                    type="GET",
+                    url="/User/Advert/TypeGet?CategoryId=" + categoryId,
+                    dataType: 'json',
+
+                    success: function (response) {
+                        debugger
+                        $('#TypeId').append('<option value="' + -1 + '">' +
+                            "Select" + '</option>');
+
+                        $.each(response, function (type) {
+                            $('#TypeId').append('<option value="' + type.value + '">' +
+                                type.text + '</option>');
+                        });
+
+
+                    },
+
+
+                });
+            });
+
+        });
+    </script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#DistrictId').change(function () {
+                var districtId = $(this).val();
+                debugger
+                $.ajax({
+                    type="Post",
+                    url="/User/Advert/NeighbourhoodGet?DistrictId=" + districtId,
+                    contentType="html",
+                    success: function (response) {
+                        debugger
+                        $("#NeighbourhoodId").empty();
+                        $("#NeighbourhoodId").append(response);
+
+                    }
+
+                })
+            })
+
+        });
+    </script>*@
+
+

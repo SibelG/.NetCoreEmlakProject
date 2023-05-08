@@ -19,9 +19,12 @@ namespace EntityLayer.Entities
         public string TypeName { get; set; }
         public bool Status { get; set; }
 
-        public int SituationId { get; set; }
+        public int CategoryId { get; set; }
+        public virtual Category Category { get; set; }
 
-        public virtual Situation Situation { get; set; }
+        //public int SituationId { get; set; }
+
+        //public virtual Situation Situation { get; set; }
 
         public virtual List<Advert> Advert { get; set; }
     }

@@ -1,0 +1,75 @@
+﻿@model List<Projects>
+
+<div id="owl-example1" class="owl-carousel1">
+    @foreach (var item in Model)
+    {
+        var c = 1;
+        <div class="properties">
+            <div class="image-holder">
+
+                @foreach (var rsm in ViewBag.images)
+                {
+                    if (rsm.ProjectId == item.ProjectId)
+                    {
+                        if (@c == 1)
+                        {
+                            <img src="~/imgProject/@rsm.ImageName" class="img-responsive" alt="properties" />
+                        }
+                        c++;
+
+                    }
+
+                }
+               
+                @if (@item.UseCase)
+                {
+                    <div class="status new">New</div>
+                }
+
+                <div class="status sold">@item.Situation.SituationName</div>
+            </div>
+            <h4><a asp-controller="Project" asp-action="PropertyDetails" asp-route-id="@item.ProjectId">@item.ProjectTitle</a></h4>
+            <p class="price">Area:@item.Area</p>
+            <p class="place" style="text-align:left; border:none;">@item.City.CityName, @item.District.DistrictName</p>
+            <p class="date" style="text-align:left; border:none;margin-bottom:20px;">@item.DeliveryDate</p>
+         @*   <div data-v-115a44dc="" data-v-3f9c9f47="" class="he-realty-card-info he-vertical-realty-card__info he-realty-card-info--vertical">
+                <ul data-v-cfe36724="" data-v-3f9c9f47="" class="he-realty-card-attributes" data-v-115a44dc="">
+                   @* @if(@item.Area == string.Empty)
+                    {
+                        <li data-v-cfe36724="" class="he-realty-card-attributes__attribute"></li>
+                    }
+                    else
+                    {
+                        <li data-v-cfe36724="" class="he-realty-card-attributes__attribute">
+                            @item.Area
+                            <span></span>
+                        </li>
+                    }
+                   @if(@item.NumberOfRooms == string.Empty)
+                    {
+                        <li data-v-cfe36724="" class="he-realty-card-attributes__attribute">
+                            <!---->
+
+                        </li>
+                    }
+                    else
+                    {
+                        <li data-v-cfe36724="" class="he-realty-card-attributes__attribute">
+                            <!---->
+                            @item.NumberOfRooms
+                        </li>
+                    }
+                    
+                  
+
+                </ul> <div data-v-115a44dc="" class="he-realty-card-info__title"><span data-v-d99bff2c="" data-v-5248465b="" class="project-listing-realty-card-title project-listing-realty-card__title" data-v-115a44dc=""><!----></span></div> <div data-v-115a44dc="" class="he-realty-card-info__location">
+                    @item.City.CityName, @item.District.DistrictName
+                </div> <div style="margin-bottom:20px;" data-v-115a44dc="" class="he-realty-card-info__listing-date">
+                    
+                </div>
+            </div>*@
+            <a class="btn-price" asp-controller="Project" asp-action="PropertyDetails" asp-route-id="@item.ProjectId">View Details</a>
+        </div>
+    }
+
+</div>

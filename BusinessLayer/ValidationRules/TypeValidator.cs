@@ -11,7 +11,7 @@ namespace BusinessLayer.ValidadionRules
     {
         public TypeValidator() {
             RuleFor(x => x.TypeName).NotEmpty().WithMessage("District name is not empty");
-            RuleFor(x => x.SituationId).NotEmpty().WithMessage("CityId is not empty");
+            //RuleFor(x => x.SituationId).NotEmpty().WithMessage("CityId is not empty");
         }
     }
 }

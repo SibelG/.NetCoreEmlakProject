@@ -21,5 +21,8 @@ namespace EntityLayer.Entities
 
         public int AdvertId { get; set; }
         public virtual Advert Advert { get; set; }
+
+   
+
     }
 }

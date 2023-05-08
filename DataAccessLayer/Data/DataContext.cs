@@ -25,6 +25,12 @@ namespace DataAccessLayer.Data
         public DbSet<Neighbourhood> Neighbourhoods { get;  set; }
         public DbSet<Situation> Situations { get; set;}
         public DbSet<EntityLayer.Entities.Type> Types { get; set; }
+        public DbSet<Projects> Projects { get; set; }
+        public DbSet<Category> Categories { get; set; }
+        public DbSet<FuelType> FuelTypes { get; set; }  
+        public DbSet<Front> Fronts { get; set; }
+        public DbSet<ProjectImage> ProjectImages { get; set; }
+        public DbSet<Heading> Headings { get; set; }
         public DbSet<UserAdmin> UserAdmins { get; set; }
 
 

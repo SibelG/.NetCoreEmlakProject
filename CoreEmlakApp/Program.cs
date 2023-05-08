@@ -64,13 +64,26 @@ builder.Services.AddScoped<ImagesService, ImagesManager>();
 builder.Services.AddScoped<ISituationRepository, EfSituationRepository>();
 builder.Services.AddScoped<SituationService, SituationManager>();
 
+builder.Services.AddScoped<IFuelTypeRepository, EfFuelTypeRepository>();
+builder.Services.AddScoped<FuelTypeService, FuelTypeManager>();
+
+builder.Services.AddScoped<IFrontRepository, EfFrontRepository>();
+builder.Services.AddScoped<FrontService, FrontManager>();
+
 builder.Services.AddScoped<ITypeRepository, EfTypeRepository>();
 builder.Services.AddScoped<TypeService, TypeManager>();
 
+builder.Services.AddScoped<ICategoryRepository, EfCategoryRepository>();
+builder.Services.AddScoped<CategoryService, CategoryManager>();
 
+builder.Services.AddScoped<IProjectImageRepository, EfProjectImageRepository>();
+builder.Services.AddScoped<ProjectImageService, ProjectImageManager>();
 
+builder.Services.AddScoped<IHeadingRepository, EfHeadingRepository>();
+builder.Services.AddScoped<HeadingService, HeadingManager>();
 
-
+builder.Services.AddScoped<IProjectRepository, EfProjectRepository>();
+builder.Services.AddScoped<ProjectService, ProjectManager>();
 
 
 var app = builder.Build();

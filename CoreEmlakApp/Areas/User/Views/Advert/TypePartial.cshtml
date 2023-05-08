@@ -1,0 +1,9 @@
+﻿<option value="">Select Type</option>
+
+@if (ViewBag.type != null)
+{
+    @foreach (var item in ViewBag.type)
+    {
+        <option value="@item.Value">@item.Text</option>
+    }
+}

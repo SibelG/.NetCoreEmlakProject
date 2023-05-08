@@ -48,6 +48,7 @@ namespace BusinessLayer.Concrete
         {
             var update = _imagesRepository.TGetById(p.ImageId);
             update.ImageName = p.ImageName;
+            update.Status = true;
             _imagesRepository.TUpdate(update);
         }
     }

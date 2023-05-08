@@ -1,5 +1,6 @@
 ﻿using BusinessLayer.Abstract;
 using BusinessLayer.ValidadionRules;
+using DataAccessLayer.Abstract;
 using EntityLayer.Entities;
 using FluentValidation.Results;
 using Microsoft.AspNetCore.Authorization;
@@ -10,10 +11,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
+
 namespace CoreEmlakApp.Areas.User.Controllers
 {
     [Area("User")]
-    [Authorize(Roles="user")]
+    [Authorize(Roles="User")]
     public class AdvertController : Controller
     {
         AdvertService advertService;
@@ -23,12 +25,15 @@ namespace CoreEmlakApp.Areas.User.Controllers
         SituationService situationService;
         TypeService typeService;
         ImagesService imagesService;
+        CategoryService categoryService;
+        FuelTypeService fuelTypeService;
+        FrontService frontService;
 
         IWebHostEnvironment webHostEnvironment;
 
 
 
-        public AdvertController(AdvertService advertService, CityService cityService, DistrictService districtService, NeighbourhoodService neighbourhoodService, SituationService situationService, TypeService typeService, IWebHostEnvironment webHostEnvironment, ImagesService imagesService)
+        public AdvertController(AdvertService advertService, CityService cityService, DistrictService districtService,FuelTypeService fuelTypeService, FrontService frontService, NeighbourhoodService neighbourhoodService,CategoryService categoryService, SituationService situationService, TypeService typeService, IWebHostEnvironment webHostEnvironment, ImagesService imagesService)
         {
             this.advertService = advertService;
             this.cityService = cityService;
@@ -36,6 +41,9 @@ namespace CoreEmlakApp.Areas.User.Controllers
             this.neighbourhoodService = neighbourhoodService;
             this.situationService = situationService;
             this.typeService = typeService;
+            this.categoryService = categoryService;
+            this.fuelTypeService = fuelTypeService;
+            this.frontService = frontService;
             this.imagesService = imagesService;
             this.webHostEnvironment = webHostEnvironment;
         }
@@ -63,7 +71,7 @@ namespace CoreEmlakApp.Areas.User.Controllers
             ValidationResult result = validationRules.Validate(data);
 
 
-            String id = HttpContext.Session.GetString("id");
+            string id = HttpContext.Session.GetString("Id");
 
             if (result.IsValid)
             {
@@ -101,6 +109,19 @@ namespace CoreEmlakApp.Areas.User.Controllers
             return View();
         }
 
+        public PartialViewResult DistrictPartial()
+        {
+            return PartialView();
+        }
+        public PartialViewResult TypePartial()
+        {
+            return PartialView();
+        }
+        public PartialViewResult NeighbourhoodPartial()
+        {
+            return PartialView();
+        }
+
         public List<City> CityGet()
         {
             List<City> cityList = cityService.List(x => x.Status == true);
@@ -117,11 +138,34 @@ namespace CoreEmlakApp.Areas.User.Controllers
             ViewBag.district = new SelectList(districtList, "DistrictId", "DistictName");
             return PartialView("DistrictPartial");
         }
-        public IActionResult TypeGet(int SituationId)
+        public JsonResult TypeGet(int CategoryId)
         {
-            List<EntityLayer.Entities.Type> typeList = typeService.List(x => x.Status == true && x.SituationId == SituationId);
+            List<EntityLayer.Entities.Type> typeList = typeService.List(x => x.Status == true && x.CategoryId == CategoryId);
             ViewBag.type = new SelectList(typeList, "TypeId", "TypeName");
-            return PartialView("TypePartial");
+            return Json(new SelectList(typeList, "TypeId", "TypeName"));
+            //return PartialView("TypePartial");
+        
+        }
+        public IActionResult NeighbourhoodGet(int DistrictId)
+        {
+            List<Neighbourhood> neighbourhoodList = neighbourhoodService.List(x => x.Status == true && x.DistrictId == DistrictId);
+            ViewBag.neighbour = new SelectList(neighbourhoodList, "NeighbourhoodId", "NeighbourhoodName");
+            return PartialView("NeighbourhoodPartial");
+        }
+        public IActionResult Filter(int min, int max, int cityId, int typeId,int neighbourhoodId, int situationId)
+        {
+            Dropdown();
+            var imageList = imagesService.List(x=>x.Status== true);
+            ViewBag.imageList = imageList;
+            var filter = advertService.List(x => x.Price >= min && x.Price <= max && x.CityId == cityId && x.TypeId == typeId && x.SituationId == situationId && x.NeighbourhoodId == neighbourhoodId);
+            return View(filter);
+
+
+        }
+        public PartialViewResult PartialFilter()
+        {
+            Dropdown();
+            return PartialView();
         }
 
         public void Dropdown()
@@ -140,6 +184,16 @@ namespace CoreEmlakApp.Areas.User.Controllers
                                            }).ToList();
 
             ViewBag.district = value1;
+            List<SelectListItem> category = (from x in categoryService.List(x => x.Status == true)
+                                           select new SelectListItem
+                                           {
+                                               Text = x.CategoryName,
+                                               Value = x.CategoryId.ToString()
+
+
+                                           }).ToList();
+
+            ViewBag.category = category;
 
             List<SelectListItem> value2 = (from x in neighbourhoodService.List(x => x.Status == true)
                                            select new SelectListItem
@@ -172,7 +226,27 @@ namespace CoreEmlakApp.Areas.User.Controllers
                                            }).ToList();
 
             ViewBag.situation = value4;
+            List<SelectListItem> value5 = (from x in fuelTypeService.List(x => x.Status == true)
+                                           select new SelectListItem
+                                           {
+                                               Text = x.FuelTypeName,
+                                               Value = x.FuelTypeId.ToString()
 
+
+                                           }).ToList();
+
+            ViewBag.FuelTypes = value5;
+
+            List<SelectListItem> value6 = (from x in frontService.List(x => x.Status == true)
+                                           select new SelectListItem
+                                           {
+                                               Text = x.FrontName,
+                                               Value = x.FrontId.ToString()
+
+
+                                           }).ToList();
+
+            ViewBag.Fronts = value6;
 
         }
     }

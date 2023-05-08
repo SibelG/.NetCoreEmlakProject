@@ -18,14 +18,7 @@
                         <span asp-validation-for="TypeName" class="text-danger"></span>
                         <br />
                         <label>Situation</label>
-                        <select asp-for="SituationId" id="SituationId" class="form-control">
-                            <option value="0" selected>Select</option>
-                            @foreach (var item in ViewBag.situations)
-                            {
-                                <option value="@item.Value">@item.Text</option>
-                            }
-
-                        </select>
+                       
                         <br />
                         <button type="submit" class="btn btn-warning">Add Type</button>
                     </form>

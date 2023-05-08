@@ -19,7 +19,7 @@ else
     <table class="table table-bordered table table-striped" id="table">
         <tr>
             <th>Type Name</th>
-            <th>Situation</th>
+           
             <th>Delete</th>
             <th>Edit</th>
         </tr>
@@ -29,7 +29,7 @@ else
                 <tr>
 
                     <td>@item.TypeName</td>
-                    <td>@item.Situation.SituationName</td>
+                    
 
                     <td><a class="btn btn-danger" id="delete" data-id="@item.TypeId">Delete</a></td>
                     <td><a class="btn btn-warning" asp-action="Update" asp-route-id="@item.TypeId">Update</a></td>

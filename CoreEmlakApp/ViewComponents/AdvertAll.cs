@@ -17,7 +17,7 @@ namespace CoreEmlakApp.ViewComponents
         {
             var list = _advertService.List(x => x.Status == true);
             var images = _imagesService.List(x=>x.Status == true);
-            ViewBag.img = images;
+            ViewBag.images = images;
             return View(list);
 
 

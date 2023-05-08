@@ -11,7 +11,7 @@ namespace BusinessLayer.ValidadionRules
     public class ImagesValidator:AbstractValidator<Images>
     {
         public ImagesValidator() {
-            RuleFor(x => x.ImageName).NotEmpty().WithMessage("District name is not empty");
+            RuleFor(x => x.ImageName).NotEmpty().WithMessage("Image name is not empty");
            
         }    
     }
