@@ -1,9 +1,12 @@
 ﻿using CoreEmlakApp.Areas.User.Models;
+using CoreEmlakApp.Areas.User.Services;
 using EntityLayer.Entities;
 using Mapster;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using NuGet.DependencyResolver;
 using System;
 using System.Collections.Generic;
@@ -21,12 +24,17 @@ namespace CoreEmlakApp.Areas.User.Controllers
         private UserManager<UserAdmin> _userManager;
         private SignInManager<UserAdmin> _signInManager;
         private RoleManager<IdentityRole> _roleManager;
+        private readonly RabbitMQHelper _rabbitMQHelper;
+        private readonly PasswordResetRequestHandler _passwordResetRequestHandler;
 
-        public UserController(SignInManager<UserAdmin> signInManager, UserManager<UserAdmin> userManager, RoleManager<IdentityRole> roleManager)
+        public UserController(PasswordResetRequestHandler passwordResetRequestHandler,RabbitMQHelper rabbitMQHelper,SignInManager<UserAdmin> signInManager, UserManager<UserAdmin> userManager, RoleManager<IdentityRole> roleManager)
         {
             _signInManager = signInManager;
             _userManager = userManager;
             _roleManager = roleManager;
+            _rabbitMQHelper = rabbitMQHelper;
+            _passwordResetRequestHandler = passwordResetRequestHandler;
+
         }
 
         public IActionResult Index()
@@ -85,7 +93,10 @@ namespace CoreEmlakApp.Areas.User.Controllers
             {
                 string resetToken = await _userManager.GeneratePasswordResetTokenAsync(user);
                 string passwordResetLink = Url.Action("UpdatePassword", "User", new { userId = user.Id, token = resetToken },HttpContext.Request.Scheme);
-                MailHelper.ResetPassword.PasswordSendMail(passwordResetLink);
+                //MailHelper.ResetPassword.PasswordSendMail(passwordResetLink);
+                _rabbitMQHelper.SendPasswordResetRequest(model.Email, passwordResetLink);
+
+                _passwordResetRequestHandler.StartHandling();
                 ViewBag.state = true;
 
             }
@@ -129,9 +140,9 @@ namespace CoreEmlakApp.Areas.User.Controllers
         }
         public IActionResult Profile()
         {
-            var user = _userManager.FindByNameAsync(User.Identity.Name);
+            var user = _userManager.FindByNameAsync(User.Identity.Name).Result;
             RegisterModel userViewModel = user.Adapt<RegisterModel>();
-            return View(user);
+            return View(userViewModel);
         }
 
         [HttpPost]
@@ -215,8 +226,63 @@ namespace CoreEmlakApp.Areas.User.Controllers
 
                 }
             }
+            var capthchaImage = HttpContext.Request.Form["g-recaptcha-response"];
+            if (string.IsNullOrEmpty(capthchaImage))
+            {
+                return Content("Recaptcha area is not empty");
+            }
+
+            var verified = await CheckCaptcha();
+            if (!verified)
+            {
+                return Content("Not Confirmed");
+
+            }
+            if (verified)
+            {
+                return Content("Successfully Confirmed");
+            }
             return View();
         }
+
+        [HttpPost]
+        public async Task<IActionResult> PostRecaptcha()
+        {
+            var capthchaImage = HttpContext.Request.Form["g-recaptcha-response"];
+            if (string.IsNullOrEmpty(capthchaImage))
+            {
+                return Content("Recaptcha area is not empty");
+            }
+
+            var verified = await CheckCaptcha();
+            if (!verified)
+            {
+                return Content("Not Confirmed");
+
+            }
+            if (verified)
+            {
+                return Content("Successfully Confirmed");
+            }
+            return View();
+
+        }
+        public async Task<bool> CheckCaptcha()
+        {
+            var postData = new List<KeyValuePair<string, string>>();
+            {
+                new KeyValuePair<string, string>("secret", "6Le1hPolAAAAAHweuPGr - qcmgYOSiLbNvZJO - xnP");
+                new KeyValuePair<string, string>("response", HttpContext.Request.Form["google-recaptcha-response"]);
+            };
+
+            var client = new HttpClient();
+            var response = await client.PostAsync("https://www.google.com/recaptcha/api/siteverify", new FormUrlEncodedContent(postData));
+            JObject obj = (JObject)JsonConvert.DeserializeObject(await response.Content.ReadAsStringAsync());
+            return (bool)obj["success"];
+
+        }
+
+     
         [AllowAnonymous]
         public IActionResult Register()
         {
@@ -239,6 +305,7 @@ namespace CoreEmlakApp.Areas.User.Controllers
                     UserName = model.UserName,
                     Email = model.Email,
                     FullName = model.FullName,
+                    Status = true,
 
 
                 };

@@ -1,9 +1,0 @@
-﻿<option value="">Select District</option>
-
-@if (ViewBag.district != null)
-{
-    @foreach(var item in ViewBag.district)
-    {
-        <option value="@item.Value">@item.Text</option>
-    }
-}

@@ -16,6 +16,8 @@ namespace EntityLayer.Entities
         }
         public string FullName { get; set; }
 
+        public bool Status { get; set; }
+
         public virtual List<Advert> Adverts { get; set; }
 
         public virtual List<Type> Types { get; set; }

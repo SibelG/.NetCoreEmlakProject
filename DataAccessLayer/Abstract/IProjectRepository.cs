@@ -9,5 +9,6 @@ namespace DataAccessLayer.Abstract
 {
     public interface IProjectRepository : IRepository<Projects>
     {
+        public void FullDelete(Projects p);
     }
 }

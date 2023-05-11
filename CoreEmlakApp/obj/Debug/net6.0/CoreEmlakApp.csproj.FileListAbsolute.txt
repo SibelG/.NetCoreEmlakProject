@@ -304,3 +304,5 @@ C:\Users\sblgn\source\repos\CoreEmlakApp\CoreEmlakApp\bin\Debug\net6.0\Newtonsof
 C:\Users\sblgn\source\repos\CoreEmlakApp\CoreEmlakApp\bin\Debug\net6.0\X.PagedList.dll
 C:\Users\sblgn\source\repos\CoreEmlakApp\CoreEmlakApp\bin\Debug\net6.0\X.PagedList.Mvc.Core.dll
 C:\Users\sblgn\source\repos\CoreEmlakApp\CoreEmlakApp\bin\Debug\net6.0\X.PagedList.Web.Common.dll
+C:\Users\sblgn\source\repos\CoreEmlakApp\CoreEmlakApp\bin\Debug\net6.0\RabbitMQ.Client.dll
+C:\Users\sblgn\source\repos\CoreEmlakApp\CoreEmlakApp\bin\Debug\net6.0\System.Threading.Channels.dll

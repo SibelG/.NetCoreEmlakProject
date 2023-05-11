@@ -1,0 +1,28 @@
+﻿@using Microsoft.AspNetCore.Identity
+@model IdentityRole
+@{
+    ViewData["Title"] = "RoleCreate";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <form method="post" asp-antiforgery="true">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <br />
+                        <label>Role Name</label>
+                        <input type="text" asp-for="Name" class="form-control"/>
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                        <br />
+                        <button type="submit" class="btn btn-warning">Create</button>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

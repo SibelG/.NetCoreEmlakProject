@@ -2,7 +2,9 @@
 using EntityLayer.Entities;
 using MessagePack;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 using X.PagedList;
 
 namespace CoreEmlakApp.Controllers
@@ -56,23 +58,63 @@ namespace CoreEmlakApp.Controllers
             ViewBag.images = images;
             return View(list);
         }
-        public IActionResult Filter(int min, int max, int CityId, int TypeId, int NeighbourhoodId, int SituationId, string searchString,int? pageNo)
+        public IActionResult Filter(String currentFilter, int? min, int? max, int? CityId, int? CategoryId, int? TypeId, int? NeighbourhoodId, int? SituationId, string searchString,int? pageNo)
         {
 
             Dropdown();
-            int _pageNo = pageNo ?? 1;
+            if (searchString != null)
+            {
+                pageNo = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+
             ViewData["CurrentFilter"] = searchString;
+       
+
             var imageList = _projectImageService.List(x => x.Status == true);
             ViewBag.images = imageList;
-           // var filter=_projectService.List(x=>x.CityId==CityId).ToPagedList<Projects>(_pageNo, 6);
-            var filter = _projectService.List(x => x.Price >= min && x.Price <= max && x.CityId == CityId && x.TypeId == TypeId && x.SituationId == SituationId && x.NeighbourhoodId == NeighbourhoodId).ToPagedList<Projects>(_pageNo, 6);
+            var filter=_projectService.List(x=>x.Status == true);
+            if (min != null)
+            {
+                filter.Where(x => x.Price >= min);
+            }
+            if (max != null)
+            {
+                filter.Where(x => x.Price <= max);
+            }
+            if (CityId != null)
+            {
+                filter.Where(x => x.CityId == CityId);
+            }
+            if (CategoryId != null)
+            {
+                filter.Where(x => x.CategoryId == CategoryId);
+            }
+            if (TypeId != null)
+            {
+                filter.Where(x => x.TypeId == TypeId);
+            }
+            if (SituationId != null)
+            {
+                filter.Where(x => x.SituationId == SituationId);
+            }
+            if (NeighbourhoodId != null)
+            {
+                filter.Where(x => x.NeighbourhoodId == NeighbourhoodId);
+            }
+
+            //var filter = _projectService.List(x => x.Price >= _min && x.Price <= _max && x.CityId == _cityId && x.TypeId == _typeId && x.SituationId == _situationId && x.NeighbourhoodId == _neighbourhoodId);
             if (!String.IsNullOrEmpty(searchString))
             {
                 filter.Where(s => s.ProjectTitle.Contains(searchString)
                                         || s.Description.Contains(searchString) || s.Type.TypeName.Contains(searchString) || s.Situation.SituationName.Contains(searchString));
             }
-
-            return View(filter);
+            int pageSize = 6;
+            int _pageNo = (pageNo ?? 1);
+            return View(filter.ToPagedList<Projects>(_pageNo, pageSize));
 
 
         }

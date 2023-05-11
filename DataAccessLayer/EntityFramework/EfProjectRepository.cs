@@ -17,6 +17,12 @@ namespace DataAccessLayer.EntityFramework
         {
             this.context = context;
         }
+        public void FullDelete(Projects p)
+        {
+            var project = context.Projects.Find(p);
+            context.Remove(project);
+            context.SaveChanges();
 
+        }
     }
 }

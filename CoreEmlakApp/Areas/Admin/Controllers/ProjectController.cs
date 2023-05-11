@@ -6,6 +6,7 @@ using FluentValidation.Results;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Newtonsoft.Json;
 using System.Diagnostics;
 
 namespace CoreEmlakApp.Areas.Admin.Controllers
@@ -209,13 +210,13 @@ namespace CoreEmlakApp.Areas.Admin.Controllers
 
         public IActionResult RestoreDeleted(int id)
         {
-            var SessionUser = HttpContext.Session.GetString("Id");
+            //var SessionUser = HttpContext.Session.GetString("Id");
             var delete = projectService.TGetById(id);
 
-            //projectService.RestoreDelete(delete);
-            //TempData["RestoreDelete"] = "Advert Again Uploaded";
-            //return RedirectToAction("Index");
-            return View();
+            projectService.RestoreDelete(delete);
+            TempData["RestoreDelete"] = "Project Again Uploaded";
+            return RedirectToAction("Index");
+            //return View();
           
 
         }
@@ -256,74 +257,60 @@ namespace CoreEmlakApp.Areas.Admin.Controllers
             return View();
 
         }
+        public IActionResult DistrictGet(int CityId)
+        {
+            var settings = new JsonSerializerSettings()
+            {
+                ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+            };
+
+            var districtList = districtService.List(x => x.Status == true && x.CityId == CityId);
+            var jsonValues = JsonConvert.SerializeObject(districtList, Formatting.Indented, settings);
+            return Json(jsonValues);
+        }
+        public IActionResult TypeGet(int CategoryId)
+        {
+
+            var settings = new JsonSerializerSettings()
+            {
+                ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+            };
+
+            var typeList = typeService.List(x => x.Status == true && x.CategoryId == CategoryId);
+            var jsonValues = JsonConvert.SerializeObject(typeList, Formatting.Indented, settings);
+            return Json(jsonValues);
+        }
+        public IActionResult NeighbourhoodGet(int DistrictId)
+        {
+            var settings = new JsonSerializerSettings()
+            {
+                ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+            };
+
+            var neighbourList = neighbourhoodService.List(x => x.Status == true && x.DistrictId == DistrictId);
+            var jsonValues = JsonConvert.SerializeObject(neighbourList, Formatting.Indented, settings);
+            return Json(jsonValues);
+        }
         public IActionResult FullDelete(int id)
         {
-            var SessionUser = HttpContext.Session.GetString("id");
-            //var delete = advertService.TGetById(id);
-
-            //if (SessionUser.ToString() == delete.UserAdminId)
-            //{
-            //    advertService.FullDelete(delete);
-
-            //    return RedirectToAction("Index");
-            //}
-            return View();
+            //var SessionUser = HttpContext.Session.GetString("id");
+            var delete = projectService.TGetById(id);
+            projectService.FullDelete(delete);
+            return RedirectToAction("Index");
+         
 
         }
         public IActionResult Delete(int id)
         {
-            var SessionUser = HttpContext.Session.GetString("Id");
-            //var delete = advertService.TGetById(id);
-
-            //if (SessionUser.ToString() == delete.UserAdminId)
-            //{
-            //    advertService.TDelete(delete);
-            //    return RedirectToAction("Index");
-            //}
-            return View();
+            //var SessionUser = HttpContext.Session.GetString("Id");
+            var delete = projectService.TGetById(id);
+            projectService.TDelete(delete);
+            return RedirectToAction("Index");
+        
 
         }
-        public PartialViewResult DistrictPartial()
-        {
-            return PartialView();
-        }
-        public PartialViewResult TypePartial()
-        {
-            return PartialView();
-        }
-        public PartialViewResult NeighbourhoodPartial()
-        {
-            return PartialView();
-        }
-
-        public List<City> CityGet()
-        {
-            List<City> cityList = cityService.List(x => x.Status == true);
-            return cityList;
-        }
-        public List<Situation> SituationGet()
-        {
-            List<Situation> situationList = situationService.List(x => x.Status == true);
-            return situationList;
-        }
-        public IActionResult DistrictGet(int CityId)
-        {
-            List<District> districtList = districtService.List(x => x.Status == true && x.CityId == CityId);
-            ViewBag.district = new SelectList(districtList, "DistrictId", "DistictName");
-            return PartialView("DistrictPartial");
-        }
-        public IActionResult TypeGet()
-        {
-            List<EntityLayer.Entities.Type> typeList = typeService.List(x => x.Status == true);
-            ViewBag.type = new SelectList(typeList, "TypeId", "TypeName");
-            return PartialView("TypePartial");
-        }
-        public IActionResult NeighbourhoodGet(int DistrictId)
-        {
-            List<Neighbourhood> neighbourhoodList = neighbourhoodService.List(x => x.Status == true && x.DistrictId == DistrictId);
-            ViewBag.neighbour = new SelectList(neighbourhoodList, "NeighbourhoodId", "NeighbourhoodName");
-            return PartialView("NeighbourhoodPartial");
-        }
+     
+  
         public void Dropdown()
         {
             // ViewBag.cityList = new SelectList(CityGet(), "CityId", "CityName");

@@ -1,10 +1,12 @@
 ﻿using BusinessLayer.Abstract;
 using BusinessLayer.ValidadionRules;
+using DataAccessLayer.Migrations;
 using EntityLayer.Entities;
 using FluentValidation.Results;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Newtonsoft.Json;
 
 namespace CoreEmlakApp.Areas.Admin.Controllers
 {
@@ -21,6 +23,7 @@ namespace CoreEmlakApp.Areas.Admin.Controllers
         private readonly ImagesService imagesService;
         private readonly FrontService frontService;
         private readonly FuelTypeService fuelTypeService;
+        private readonly CategoryService categoryService;
 
         private readonly IWebHostEnvironment webHostEnvironment;
       
@@ -28,7 +31,7 @@ namespace CoreEmlakApp.Areas.Admin.Controllers
       
         public AdvertController(AdvertService advertService,CityService cityService,DistrictService districtService,
             NeighbourhoodService neighbourhoodService,SituationService situationService,TypeService typeService,
-            IWebHostEnvironment webHostEnvironment,ImagesService imagesService,FuelTypeService fuelTypeService,FrontService frontService)
+            IWebHostEnvironment webHostEnvironment, CategoryService categoryService,ImagesService imagesService,FuelTypeService fuelTypeService,FrontService frontService)
         {
             this.advertService = advertService;
             this.cityService = cityService;
@@ -39,6 +42,7 @@ namespace CoreEmlakApp.Areas.Admin.Controllers
             this.imagesService = imagesService;
             this.fuelTypeService = fuelTypeService;
             this.frontService = frontService;
+            this.categoryService = categoryService;
             this.webHostEnvironment = webHostEnvironment;
             
         }
@@ -285,46 +289,41 @@ namespace CoreEmlakApp.Areas.Admin.Controllers
             return View();
             
         }
-        public PartialViewResult DistrictPartial()
-        {
-            return PartialView();
-        }
-        public PartialViewResult TypePartial()
-        {
-            return PartialView();
-        }
-        public PartialViewResult NeighbourhoodPartial()
-        {
-            return PartialView();
-        }
+       
 
-        public List<City> CityGet()
-        {
-            List<City> cityList = cityService.List(x=>x.Status == true);
-            return cityList;
-        }
-        public List<Situation> SituationGet()
-        {
-            List<Situation> situationList = situationService.List(x => x.Status == true);
-            return situationList;
-        }
         public IActionResult DistrictGet(int CityId)
         {
-            List<District> districtList = districtService.List(x => x.Status == true && x.CityId == CityId);
-            ViewBag.district = new SelectList(districtList, "DistrictId", "DistictName");
-            return PartialView("DistrictPartial");
+            var settings = new JsonSerializerSettings()
+            {
+                ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+            };
+        
+            var districtList = districtService.List(x => x.Status == true && x.CityId==CityId);
+            var jsonValues = JsonConvert.SerializeObject(districtList,Formatting.Indented, settings);
+            return Json(jsonValues);
         }
         public IActionResult TypeGet(int CategoryId)
         {
-            List<EntityLayer.Entities.Type> typeList = typeService.List(x => x.Status == true && x.CategoryId== CategoryId);
-            ViewBag.type = new SelectList(typeList, "TypeId", "TypeName");
-            return PartialView("TypePartial");
+           
+            var settings = new JsonSerializerSettings()
+            {
+                ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+            };
+
+            var typeList = typeService.List(x => x.Status == true && x.CategoryId == CategoryId);
+            var jsonValues = JsonConvert.SerializeObject(typeList, Formatting.Indented, settings);
+            return Json(jsonValues);
         }
         public IActionResult NeighbourhoodGet(int DistrictId)
         {
-            List<Neighbourhood> neighbourhoodList = neighbourhoodService.List(x => x.Status == true && x.DistrictId == DistrictId);
-            ViewBag.neighbour = new SelectList(neighbourhoodList, "NeighbourhoodId", "NeighbourhoodName");
-            return PartialView("NeighbourhoodPartial");
+            var settings = new JsonSerializerSettings()
+            {
+                ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+            };
+
+            var neighbourList = neighbourhoodService.List(x => x.Status == true && x.DistrictId == DistrictId);
+            var jsonValues = JsonConvert.SerializeObject(neighbourList, Formatting.Indented, settings);
+            return Json(jsonValues);
         }
         public void Dropdown()
         {
@@ -339,7 +338,17 @@ namespace CoreEmlakApp.Areas.Admin.Controllers
                                            }).ToList();
 
             ViewBag.cityList = value;
-           // ViewBag.situations = new SelectList(SituationGet(), "SituationId", "SituationName");
+            List<SelectListItem> category = (from x in categoryService.List(x => x.Status == true)
+                                          select new SelectListItem
+                                          {
+                                              Text = x.CategoryName,
+                                              Value = x.CategoryId.ToString()
+
+
+                                          }).ToList();
+
+            ViewBag.category = category;
+            // ViewBag.situations = new SelectList(SituationGet(), "SituationId", "SituationName");
             List<SelectListItem> situationList = (from x in situationService.List(x => x.Status == true)
                                            select new SelectListItem
                                            {

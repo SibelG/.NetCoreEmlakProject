@@ -1,6 +1,7 @@
 ﻿using BusinessLayer.Abstract;
 using EntityLayer.Entities;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using X.PagedList;
 
@@ -112,22 +113,33 @@ namespace CoreEmlakApp.Controllers
             ViewBag.neighbour = new SelectList(neighbourhoodList, "NeighbourhoodId", "NeighbourhoodName");
             return PartialView("NeighbourhoodPartial");
         }
-        public IActionResult Filter(int min, int max, int cityId, int typeId, int neighbourhoodId, int situationId, string searchString, int? pageNo)
+        public IActionResult Filter(string currentFilter, int min, int max, int cityId, int typeId, int neighbourhoodId, int situationId, string searchString, int? _pageNo)
         {
 
             Dropdown();
-            int _pageNo = pageNo ?? 1;
-            ViewData["CurrentFilter"] = searchString;
+            if (searchString != null)
+            {
+                _pageNo = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+
+            ViewBag.CurrentFilter = searchString;
+            //int _pageNo = pageNo ?? 1;
+            //ViewData["CurrentFilter"] = searchString;
             var imageList = _imagesService.List(x => x.Status == true);
             ViewBag.images = imageList;
-            var filter = _advertService.List(x => x.Price >= min && x.Price <= max && x.CityId == cityId && x.TypeId == typeId && x.SituationId == situationId && x.NeighbourhoodId == neighbourhoodId).ToPagedList<Advert>(_pageNo, 6);
+            var filter = _advertService.List(x => x.Price >= min && x.Price <= max && x.CityId == cityId && x.TypeId == typeId && x.SituationId == situationId && x.NeighbourhoodId == neighbourhoodId);
             if (!String.IsNullOrEmpty(searchString))
             {
                filter.Where(s => s.AdvertTitle.Contains(searchString)
                                        || s.Description.Contains(searchString) || s.Type.TypeName.Contains(searchString) || s.Situation.SituationName.Contains(searchString));
             }
-
-            return View(filter);
+            int pageSize = 6;
+            int pageNo = (_pageNo ?? 1);
+            return View(filter.ToPagedList<Advert>(pageNo, pageSize));
 
 
         }

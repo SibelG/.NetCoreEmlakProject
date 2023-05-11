@@ -9,5 +9,7 @@ namespace BusinessLayer.Abstract
 {
     public interface ProjectService: GenericService<Projects>
     {
+        public void RestoreDelete(Projects projects);
+        public void FullDelete(Projects projects);
     }
 }

@@ -2249,6 +2249,10 @@
       "PackagePath": "staticwebassets\\adminweb\\index.html"
     },
     {
+      "Id": "C:\\Users\\sblgn\\source\\repos\\CoreEmlakApp\\CoreEmlakApp\\wwwroot\\adminweb\\js\\cascade.js",
+      "PackagePath": "staticwebassets\\adminweb\\js\\cascade.js"
+    },
+    {
       "Id": "C:\\Users\\sblgn\\source\\repos\\CoreEmlakApp\\CoreEmlakApp\\wwwroot\\adminweb\\js\\custom.min.js",
       "PackagePath": "staticwebassets\\adminweb\\js\\custom.min.js"
     },

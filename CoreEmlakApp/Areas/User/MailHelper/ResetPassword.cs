@@ -9,9 +9,9 @@ namespace CoreEmlakApp.Areas.User.MailHelper
             MailMessage message = new MailMessage();
             SmtpClient smtpClient = new SmtpClient();
 
-            message.From=new MailAddress("system@mail.com");
+            message.From=new MailAddress("system@gmail.com");
 
-            message.To.Add("stateproje114@mail.com");
+            message.To.Add("sbl.gnctrk19@gmail.com");
             message.Subject = "Password Updateing Request";
             message.Body = "<h2> Click link for update your password</h2>";
             message.Body += $"<a href='{link}'> Password  renewal link";
@@ -20,7 +20,7 @@ namespace CoreEmlakApp.Areas.User.MailHelper
             smtpClient.Host = "smtp.gmail.com";
             smtpClient.Port = 587;
             smtpClient.EnableSsl = true;
-            smtpClient.Credentials = new System.Net.NetworkCredential("stateproje114@mail.com", "stateproje123");
+            smtpClient.Credentials = new System.Net.NetworkCredential("sbl.gnctrk19@gmail.com", "stateproje123");
             smtpClient.Send(message);
         }
     }

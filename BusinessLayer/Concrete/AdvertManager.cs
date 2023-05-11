@@ -65,6 +65,7 @@ namespace BusinessLayer.Concrete
         {
             var advert = _advertRepository.TGetById(p.AdvertId);
             advert.Address=p.Address;
+            advert.AdvertTitle = p.AdvertTitle;
             advert.Description=p.Description;
             advert.BathRoomNumbers=p.BathRoomNumbers;
             advert.PhoneNumber=p.PhoneNumber;
