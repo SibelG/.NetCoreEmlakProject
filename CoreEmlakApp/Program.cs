@@ -1,6 +1,7 @@
 using BusinessLayer.Abstract;
 using BusinessLayer.Concrete;
 using CoreEmlakApp.Areas.Admin.Identity;
+using CoreEmlakApp.Areas.User.Services;
 using DataAccessLayer.Abstract;
 using DataAccessLayer.Data;
 using DataAccessLayer.EntityFramework;
@@ -84,6 +85,9 @@ builder.Services.AddScoped<HeadingService, HeadingManager>();
 
 builder.Services.AddScoped<IProjectRepository, EfProjectRepository>();
 builder.Services.AddScoped<ProjectService, ProjectManager>();
+
+builder.Services.AddScoped<RabbitMQHelper>();
+builder.Services.AddScoped<PasswordResetRequestHandler>();
 
 
 var app = builder.Build();

@@ -46,7 +46,7 @@
         var districtId = $(this).val();
         $("#NeighbourhoodId").empty();
         $("#NeighbourhoodId").append('<option> Select </option>');
-        debugger
+
         $.ajax({
             contentType: "application/json",
             dataType: "json",
@@ -54,7 +54,6 @@
             url: "/Admin/Advert/NeighbourhoodGet/",
             data: { DistrictId: districtId },
             success: function (response) {
-                debugger
 
                 console.log(response)
 
@@ -62,9 +61,9 @@
                 console.log(w);
 
 
-                $.each(w, function (index, type) {
-                    $("#NeighbourhoodId").append('<option value=' + type.TypeId + '>' +
-                        type.TypeName + '</option>');
+                $.each(w, function (index, neighbourhood) {
+                    $("#NeighbourhoodId").append('<option value=' + neighbourhood.NeighbourhoodId + '>' +
+                        neighbourhood.NeighbourhoodName + '</option>');
                 });
 
             },
@@ -89,7 +88,7 @@
             contentType: "application/json",
             dataType: "json",
             type: "Get",
-            url="/Admin/Advert/TypeGet/",
+            url: "/Admin/Advert/TypeGet/",
             data: { CategoryId: categoryId },
             success: function (response) {
                 debugger

@@ -260,12 +260,20 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvamVjdFxQYXJ0aWFsRmlsdGVyLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/sblgn/source/repos/CoreEmlakApp/CoreEmlakApp/Views/Project/PartialSorter.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvamVjdFxQYXJ0aWFsU29ydGVyLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/sblgn/source/repos/CoreEmlakApp/CoreEmlakApp/Views/Project/ProjectAll.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvamVjdFxQcm9qZWN0QWxsLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/sblgn/source/repos/CoreEmlakApp/CoreEmlakApp/Views/Project/PropertyDetails.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvamVjdFxQcm9wZXJ0eURldGFpbHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/sblgn/source/repos/CoreEmlakApp/CoreEmlakApp/Views/Project/Sorting.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvamVjdFxTb3J0aW5nLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/sblgn/source/repos/CoreEmlakApp/CoreEmlakApp/Views/Shared/Components/AdvertAll/Default.cshtml]

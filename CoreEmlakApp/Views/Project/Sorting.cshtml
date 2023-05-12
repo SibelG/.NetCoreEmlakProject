@@ -1,0 +1,173 @@
+﻿@using X.PagedList.Mvc.Core
+@using X.PagedList
+@model IPagedList<Projects>
+
+@{
+    ViewData["Title"] = "Sorting";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<div class="inside-banner">
+    <div class="container">
+        <span class="pull-right"><a href="index.php">Home</a> / Buy, Sale & Rent</span>
+        <h2>Buy, Sale & Rent</h2>
+    </div>
+</div>s
+<!-- banner -->
+
+
+<div class="container">
+    <div class="properties-listing spacer">
+
+        <div class="row">
+            <div class="col-lg-3 col-sm-4 ">
+
+                @await Html.PartialAsync("~/Views/Project/PartialFilter.cshtml");
+
+
+
+                <div class="hot-properties hidden-xs">
+                    <h4>Hot Properties</h4>
+                    <div class="row">
+                        <div class="col-lg-4 col-sm-5"><img src="images/properties/1.jpg" class="img-responsive img-circle" alt="properties"></div>
+                        <div class="col-lg-8 col-sm-7">
+                            <h5><a href="property-detail.php">Integer sed porta quam</a></h5>
+                            <p class="price">$300,000</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-4 col-sm-5"><img src="images/properties/1.jpg" class="img-responsive img-circle" alt="properties"></div>
+                        <div class="col-lg-8 col-sm-7">
+                            <h5><a href="property-detail.php">Integer sed porta quam</a></h5>
+                            <p class="price">$300,000</p>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-4 col-sm-5"><img src="images/properties/1.jpg" class="img-responsive img-circle" alt="properties"></div>
+                        <div class="col-lg-8 col-sm-7">
+                            <h5><a href="property-detail.php">Integer sed porta quam</a></h5>
+                            <p class="price">$300,000</p>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-4 col-sm-5"><img src="images/properties/1.jpg" class="img-responsive img-circle" alt="properties"></div>
+                        <div class="col-lg-8 col-sm-7">
+                            <h5><a href="property-detail.php">Integer sed porta quam</a></h5>
+                            <p class="price">$300,000</p>
+                        </div>
+                    </div>
+
+                </div>
+
+
+            </div>
+
+            <div class="col-lg-9 col-sm-8">
+                <div class="sortby clearfix">
+                    <div class="pull-left result">Showing: @ViewBag.count </div>
+                    <a asp-for="price_desc"asp-action="Sorting" asp-route-sortOrder="@ViewData["PriceSortParm"]">ggg</a>
+                    <a asp-for="price_asc" asp-action="Sorting" asp-route-sortOrder="@ViewData["PriceSortAscParm"]">ggg</a>
+                   @* <a href="Sorting" id="lnkCancel">Select item in dropdown</a>*@
+                    @*@await Html.PartialAsync("~/Views/Project/PartialSorter.cshtml");*@
+                    <div class="pull-right">
+                        <select class="form-control" id="mySelect">
+                            <option>Sort by</option>
+                            <option value="price_desc">Price Low to High</a></option>
+                            <option value="price_asc">Price: High to Low</option>
+                            <option>Delivery Date: <a asp-action="Sorting" asp-route-sortOrder="@ViewData["DateSortParm"]">Low to High</a></option>
+                            <option>Delivery Date: High to Low</option>
+                        </select>
+                    </div>
+
+                </div>
+
+                @foreach (var item in Model)
+                {
+                    var c = 1;
+                    <div class="PBL1h3" data-index="1" data-project-card="true">
+                        <a asp-controller="Project" asp-action="PropertyDetails" asp-route-id="@item.ProjectId" class="PBL1h3" target="_blank" rel="noopener">
+                            <div class="KVNbdJ">
+                                <div class="_3aUM-g">
+                                    <div style="font-family:Roboto;font-size:10px;font-weight:500;font-style:normal;font-stretch:normal;line-height:21px;letter-spacing:normal;text-align:center;height:20px;color:#fff;border-radius:3px;padding:0 5px;margin-bottom:5px;z-index:1;background-color:#52ca46">PROJE</div>
+                                </div>
+                            </div>
+                            <div style="position: absolute; right: 8px; top: 8px; left: auto;">
+                                <div style="font-family: Roboto; font-size: 10px; font-weight: 500; font-style: normal; font-stretch: normal; line-height: 21px; letter-spacing: normal; text-align: center; height: 20px; color: rgb(255, 255, 255); border-radius: 3px; padding: 0px 5px; margin-bottom: 5px; z-index: 1; background-color: rgb(95, 120, 126);">PREMIUM</div>
+                            </div>
+                            <div class="_1Txpjc">
+                                @foreach (var rsm in ViewBag.images)
+                                {
+
+                                    if (rsm.ProjectId == item.ProjectId)
+                                    {
+                                        if (@c == 1)
+                                        {
+
+                                            <img src="~/imgProject/@rsm.ImageName" alt="@item.ProjectTitle" width="240" height="150">
+                                        }
+                                        c++;
+
+                                    }
+
+                                }
+
+                            </div>
+                            <div class="_3hnqEj">
+                                <div class="_1OUJO8">@item.ProjectTitle</div>
+                                <p>
+                                    <span class="_1MaOz9">@item.District.DistrictName / @item.City.CityName - @item.ProjectCompany </span>
+                                </p>
+                                <div class="_1gvKP7">
+                                    <span class="_1MaOz9"><i class="fa fa-thumb-tack"></i>@item.TypeCount @item.Type.TypeName</span>
+                                    <span class="_1MaOz9"><i class="fa fa-calendar"></i>@item.BuildingDelivery</span>
+                                    <span class="_1MaOz9"><i class="fa fa-area-chart"></i>@item.Area</span>
+                                    <span class="_1MaOz9"><i class="fa fa-area-chart"></i>Prices starting from @item.Price ₺</span>
+                                </div><div class="_17jTCi">
+                                    <button class="ej27 ej1 ej3 ej6 _1BPba0" tabindex="0" type="button">
+                                        <span class="ej2">Ask Price</span>
+                                        <span class="ej169"></span>
+                                    </button>
+                                </div>
+                            </div>
+                        </a>
+                        <div class="_1N8ZJ1">
+                        </div>
+                    </div>
+                }
+
+            </div>
+
+
+        </div>
+        <div style="display:flex;justify-content:center;align-items:center;">
+            @Html.PagedListPager(Model, _pageNo => Url.Action("ProjectAll", "Project", new { pageNo = _pageNo }))
+        </div>
+
+
+    </div>
+
+</div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        var ddl = document.getElementById('mySelect');
+
+        ddl.addEventListener('change', function () {
+
+            var url = 'Sorting';           // base url
+            var link = document.getElementById('lnkCancel');           // get link to update
+            var selectedValue = ddl.options[ddl.selectedIndex].value;  // get selected value
+            link.href = url + '?sortOrder=' + selectedValue;              // update link href
+
+            link.innerText = link.href;  // dont include this, this just shows the url text
+        });
+    });
+    </script>
+
+
+
+

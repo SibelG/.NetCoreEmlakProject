@@ -67,12 +67,19 @@
 
             <div class="col-lg-9 col-sm-8">
                 <div class="sortby clearfix">
-                    <div class="pull-left result">Showing: ViewBag.count </div>
+                    <div class="pull-left result">Showing: @ViewBag.count </div>
+                    <a asp-action="Sorting" asp-route-sortOrder="@ViewData["PriceSortParm"]">ggg</a>
+                    <a asp-action="Sorting" asp-route-sortOrder="@ViewData["PriceSortAscParm"]">ggg</a>
+                   @* @await Html.PartialAsync("~/Views/Project/PartialSorter.cshtml");*@
                     <div class="pull-right">
+                       
                         <select class="form-control">
+                           
                             <option>Sort by</option>
-                            <option>Price: Low to High</option>
-                            <option>Price: High to Low</option>
+                            <option asp-action="Sorting" asp-route-sortOrder="@ViewData["PriceSortParm"]">Price: Low to High </option>
+                            <option asp-action="Sorting" asp-route-sortOrder="@ViewData["PriceSortParm"]">Price: High to Low</option>
+                            <option asp-action="Sorting" asp-route-sortOrder="@ViewData["DateSortParm"]">Delivery Date: Low to High</a></option>
+                            <option asp-action="Sorting" asp-route-sortOrder="@ViewData["DateSortParm"]">Delivery Date: High to Low</option>
                         </select>
                     </div>
 
@@ -82,7 +89,7 @@
                 {
                     var c = 1;
                     <div class="PBL1h3" data-index="1" data-project-card="true">
-                        <a href="/projeler/proje/bella-residence/" class="PBL1h3" target="_blank" rel="noopener">
+                        <a asp-controller="Project" asp-action="PropertyDetails" asp-route-id="@item.ProjectId"  class="PBL1h3" target="_blank" rel="noopener">
                             <div class="KVNbdJ">
                                 <div class="_3aUM-g">
                                     <div style="font-family:Roboto;font-size:10px;font-weight:500;font-style:normal;font-stretch:normal;line-height:21px;letter-spacing:normal;text-align:center;height:20px;color:#fff;border-radius:3px;padding:0 5px;margin-bottom:5px;z-index:1;background-color:#52ca46">PROJE</div>
@@ -115,9 +122,10 @@
                                     <span class="_1MaOz9">@item.District.DistrictName / @item.City.CityName - @item.ProjectCompany </span>
                                 </p>
                                 <div class="_1gvKP7">
-                                    <span class="_1MaOz9"><i class="fa fa-area-chart"></i>@item.Area</span>
                                     <span class="_1MaOz9"><i class="fa fa-thumb-tack"></i>@item.TypeCount @item.Type.TypeName</span>
                                     <span class="_1MaOz9"><i class="fa fa-calendar"></i>@item.BuildingDelivery</span>
+                                    <span class="_1MaOz9"><i class="fa fa-area-chart"></i>@item.Area</span>
+                                    <span class="_1MaOz9"><i class="fa fa-area-chart"></i>Prices starting from @item.Price ₺</span>
                                 </div><div class="_17jTCi">
                                     <button class="ej27 ej1 ej3 ej6 _1BPba0" tabindex="0" type="button">
                                         <span class="ej2">Ask Price</span>

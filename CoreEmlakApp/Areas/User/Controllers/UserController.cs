@@ -12,7 +12,10 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using System.Net.Mail;
+using System.Net;
 using System.Threading.Tasks;
+using System.Web;
 using System.Web.Razor.Generator;
 
 namespace CoreEmlakApp.Areas.User.Controllers
@@ -81,11 +84,13 @@ namespace CoreEmlakApp.Areas.User.Controllers
             return View();
         }
 
+        [AllowAnonymous]
         public IActionResult ResetPassword()
         {
             return View(new ResetPasswordModel());
         }
-
+        [HttpPost]
+        [AllowAnonymous]
         public async Task<IActionResult> ResetPassword(ResetPasswordModel model)
         {
             UserAdmin user = await _userManager.FindByEmailAsync(model.Email);
@@ -98,7 +103,7 @@ namespace CoreEmlakApp.Areas.User.Controllers
 
                 _passwordResetRequestHandler.StartHandling();
                 ViewBag.state = true;
-
+              
             }
             else
             {

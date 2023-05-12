@@ -1,0 +1,9 @@
+﻿<div class="pull-right">
+    <select class="form-control">
+        <option>Sort by</option>
+        <option>Price: <a asp-action="PartialSorter" asp-route-sortOrder="@ViewData["PriceSortParm"]">Low to High</a></option>
+        <option>Price: High to Low</option>
+        <option>Delivery Date: <a asp-action="PartialSorter" asp-route-sortOrder="@ViewData["DateSortParm"]">Low to High</a></option>
+        <option>Delivery Date: High to Low</option>
+    </select>
+</div>
