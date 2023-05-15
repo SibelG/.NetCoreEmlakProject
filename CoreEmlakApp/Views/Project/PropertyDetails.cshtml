@@ -13,10 +13,10 @@
 </div>
 <!-- banner -->
 
-<div class="container">
+<div class="container-fluid">
     <div class="properties-listing spacer">
 
-        <div class="row">
+        <div class="row" style="margin: 0px 40px;">
             <div class="col-lg-3 col-sm-4 hidden-xs">
 
                 <div class="hot-properties hidden-xs">
@@ -66,11 +66,13 @@
 
             <div class="col-lg-9 col-sm-8 ">
                 @if(@Model.UseCase){
-                    <h2>Project construction has been completed @Model.NumberOfRooms</h2>
+                    <h2 style="font-size:20px;">Project construction has been completed @Model.NumberOfRooms</h2>
+                    <br />
                 }
                 else
                 {
-                    <h2>The project is in the construction phase @Model.NumberOfRooms</h2>
+                    <h2 style="font-size:20px;">The project is in the construction phase @Model.NumberOfRooms</h2>
+                    <br />
                 }
 
                 <div class="row">
@@ -173,7 +175,11 @@
                                 {
                                     <p class="price">The price is not specified</p>
                                 }
-                                <p class="price">₺ @Model.Price</p>
+
+                                else{
+                                    <p class="price">₺ @Model.Price</p>
+                                }
+                               
                                 <p class="area"><span class="glyphicon glyphicon-map-marker"></span> 344 @Model.Type.TypeName, @Model.Neighbourhood.District.DistrictName, @Model.Neighbourhood.District.City.CityName</p>
 
                                 <div class="profile">

@@ -93,6 +93,9 @@ namespace CoreEmlakApp.Controllers
                 filter.Where(x => x.ProjectTitle.Contains(searchString)
                                         || x.Description.Contains(searchString) || x.Type.TypeName.Contains(searchString) || x.Situation.SituationName.Contains(searchString));
             }
+            var count = filter.Count();
+            ViewBag.count = count;
+
             int _pageNo = pageNo ?? 1;
             int pageSize = 6;
             return View(filter.ToPagedList<Projects>(_pageNo, pageSize));

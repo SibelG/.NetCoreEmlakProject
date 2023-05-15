@@ -147,7 +147,7 @@ table{background-color: #fff;}
 .property-info{margin:0 0 30px 0;}
 .property-info span{margin-right: 5px;}
 .property-info p{margin-bottom:10px; }
-.property-info p.price{font-size: 28px;color: #72b70f;padding:0;border-radius: 5px;}
+.property-info p.price{font-size: 20px;color: #72b70f;padding:0;border-radius: 5px;}
     .property-info p.detail {
         font-size: 28px;
         color: #72b70f;

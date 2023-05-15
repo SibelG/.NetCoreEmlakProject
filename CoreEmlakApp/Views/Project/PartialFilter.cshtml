@@ -1,17 +1,10 @@
 ﻿
 <div class="search-form">
     <h4><span class="glyphicon glyphicon-search"></span> Search for</h4>
-    <form asp-action="Filter" method="get">
-        <div class="form-actions no-color">
-            <p>
-                <input type="text" class="form-control "name="SearchString" value="@ViewData["CurrentFilter"]" />
-                <input type="submit" value="Search" class="btn btn-default" />  
-            </p>
-        </div>
-    </form>
-  
+
     <form  asp-controller="Project" asp-action="Filter" method="get">
-   @*     <div class="row">
+
+       <div class="row">
             <div class="col-lg-12">
                 <div class="form-group">
                     <input type="text" class="form-control" name="SearchString" placeholder="Search of Properties" value="@ViewData["CurrentFilter"]" />
@@ -21,16 +14,7 @@
             </div>
 
         </div>
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="form-actions no-color">
-                    <p>
-                        <input type="text" class="form-control" name="SearchString" placeholder="Search of Properties" value="@ViewData["CurrentFilter"]" />
-                 
-                    </p>
-                </div>
-            </div>
-        </div>*@
+  
         
         <div class="row">
             <div class="col-lg-6">

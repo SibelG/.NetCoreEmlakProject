@@ -67,7 +67,7 @@
 
             <div class="col-lg-9 col-sm-8">
                 <div class="sortby clearfix">
-                    <div class="pull-left result">Showing: ViewBag.count </div>
+                    <div class="pull-left result">Showing: @ViewBag.count </div>
                     <div class="pull-right">
                         <select class="form-control">
                             <option>Sort by</option>
@@ -82,7 +82,7 @@
                 {
                     var c = 1;
                     <div class="PBL1h3" data-index="1" data-project-card="true">
-                        <a href="/projeler/proje/bella-residence/" class="PBL1h3" target="_blank" rel="noopener">
+                        <a asp-controller="Project" asp-action="PropertyDetails" asp-route-id="@item.ProjectId" class="PBL1h3" target="_blank" rel="noopener">
                             <div class="KVNbdJ">
                                 <div class="_3aUM-g">
                                     <div style="font-family:Roboto;font-size:10px;font-weight:500;font-style:normal;font-stretch:normal;line-height:21px;letter-spacing:normal;text-align:center;height:20px;color:#fff;border-radius:3px;padding:0 5px;margin-bottom:5px;z-index:1;background-color:#52ca46">PROJE</div>

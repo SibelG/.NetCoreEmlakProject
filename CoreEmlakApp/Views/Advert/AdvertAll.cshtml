@@ -97,7 +97,7 @@
                                     }
                                     <div class="status sold">@item.Situation.SituationName</div>
                                 </div>
-                                <h4><a href="property-detail.php">@item.Neighbourhood.District.City.CityName</a></h4>
+                                <h4><a asp-controller="Advert" asp-action="PropertyDetails" asp-route-id="@item.AdvertId">@item.Neighbourhood.District.City.CityName</a></h4>
                                 <p class="price">Price: @item.Price ₺</p>
                                 <div class="listing-detail1"><span data-toggle="tooltip" data-placement="bottom" data-original-title="Bed Room">Room</span> <span data-toggle="tooltip" data-placement="bottom" data-original-title="Living Room">Bath</span> <span data-toggle="tooltip" data-placement="bottom" data-original-title="Parking">Floor</span> <span data-toggle="tooltip" data-placement="bottom" data-original-title="Kitchen">Area</span> </div>
                                 <div class="listing-detail"><span data-toggle="tooltip" data-placement="bottom" data-original-title="Bed Room">@item.NumberOfRooms</span> <span data-toggle="tooltip" data-placement="bottom" data-original-title="Living Room">@item.BathRoomNumbers</span> <span data-toggle="tooltip" data-placement="bottom" data-original-title="Parking">@item.Floor</span> <span data-toggle="tooltip" data-placement="bottom" data-original-title="Kitchen">@item.Area m2</span> </div>
