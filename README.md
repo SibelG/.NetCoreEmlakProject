@@ -11,3 +11,5 @@ Angular-.Net Core 6-Web Api
 ![k8](https://github.com/SibelG/.NetCoreEmlakProject/assets/46397935/3ad73c11-45ee-4664-bf02-969b4b7f84b2)
 ![k6](https://github.com/SibelG/.NetCoreEmlakProject/assets/46397935/0d561782-f526-4e85-91e6-4a3ee8aaf813)
 ![k2](https://github.com/SibelG/.NetCoreEmlakProject/assets/46397935/83827e1b-ba19-4ab1-b48f-b32ae37c4f9a)
+![k13](https://github.com/SibelG/.NetCoreEmlakProject/assets/46397935/89766a2d-aeb4-4637-8f31-b11fb8a11b67)
+
