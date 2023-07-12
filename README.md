@@ -1,5 +1,5 @@
 # .NetCoreEmlakProject
-Angular-.Net Core 6-Web Api
+.Net Core 6-Web Api
 
 ![k10](https://github.com/SibelG/.NetCoreEmlakProject/assets/46397935/03c1f936-35b5-4c8e-b197-6b83659c5b67)
 ![1](https://github.com/SibelG/.NetCoreEmlakProject/assets/46397935/47318c95-0935-4924-93e8-a272182c97c0)
