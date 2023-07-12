@@ -6,7 +6,6 @@
 ![k4](https://github.com/SibelG/.NetCoreEmlakProject/assets/46397935/e3c8158a-8d8e-4826-ba4d-e1c918cfebf4)
 ![k3](https://github.com/SibelG/.NetCoreEmlakProject/assets/46397935/cc79a8a4-b1f9-449c-b782-1c3c67ffcf44)
 ![k9](https://github.com/SibelG/.NetCoreEmlakProject/assets/46397935/8777fc0d-f2e9-4fab-80ca-b03100435e3c)
-![k5](https://github.com/SibelG/.NetCoreEmlakProject/assets/46397935/53b2e961-4aba-4f15-8ec5-101bf54d1109)
 ![k7](https://github.com/SibelG/.NetCoreEmlakProject/assets/46397935/a357a33a-5800-4943-b996-cf4491e0d0f7)
 ![k8](https://github.com/SibelG/.NetCoreEmlakProject/assets/46397935/3ad73c11-45ee-4664-bf02-969b4b7f84b2)
 ![k6](https://github.com/SibelG/.NetCoreEmlakProject/assets/46397935/0d561782-f526-4e85-91e6-4a3ee8aaf813)
